@@ -23,6 +23,7 @@
     "fontawesome-4.7": "^4.7.0",
     "jquery": "^3.5.1",
     "magnific-popup": "^1.1.0",
+    "ngx-bootstrap": "^6.2.0",
     "owl.carousel": "^2.3.4",
     "popper.js": "^1.16.1",
     "rxjs": "~6.4.0",

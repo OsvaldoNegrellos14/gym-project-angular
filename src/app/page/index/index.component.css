@@ -566,6 +566,7 @@ ol {
 
 .service-video {
   height: 636px;
+  background-image: url('/assets/img/video-bg.jpg');
 }
 .service-video .play-btn {
   display: -webkit-box;
@@ -616,6 +617,7 @@ ol {
   Cta Section
 -----------------------*/
 .cta-section {
+  background-image: url('/assets/img/cta-bg.jpg');
   text-align: center;
   padding-top: 110px;
   padding-bottom: 120px;
@@ -700,6 +702,9 @@ ol {
 /*---------------------
   Trainer Section
 -----------------------*/
+.trainer-schedule{
+  background-image: url('/assets/img/trainer-bg.jpg');
+}
 .trainer-schedule.class-timetable .section-title h2, .class-timetable.choseus-section .section-title h2, .class-timetable.about-page-trainer .section-title h2 {
   color: #191919;
   margin-bottom: 61px;
@@ -1030,6 +1035,7 @@ ol {
 }
 
 .footer-form {
+  background-image: url('/assets/img/contact-form-bg.jpg');
   margin-left: -15px;
   margin-right: -15px;
   height: 610px;
