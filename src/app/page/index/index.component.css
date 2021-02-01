@@ -524,6 +524,9 @@ ol {
   top: 100px;
   opacity: 0;
 }
+.lead{
+  margin-bottom: 12rem;
+}
 
 /*---------------------
   Services Section
@@ -2050,9 +2053,15 @@ ol {
   .container {
     max-width: 1170px;
   }
+  .lead {
+    margin-bottom: 10rem;
+  }
 }
 /* Medium Device = 1200px */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .lead {
+    margin-bottom: 0;
+  }
   .latest-items .latest-text .latest-tag .tag-comments {
     margin-left: 15px;
   }
@@ -2062,6 +2071,9 @@ ol {
   }
 }
 @media only screen and (max-width: 992px) {
+  .lead {
+    margin-bottom: 0;
+  }
   .class-section .primary-btn {
     margin-bottom: 20px;
     float: none;
@@ -2114,6 +2126,12 @@ ol {
 }
 /* Tablet Device = 768px */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  .lead {
+    margin-bottom: 0;
+  }
+  .lead h1 {
+    font-size: 3.5rem !important;
+  }
   .nav-menu .mainmenu ul li {
     margin-right: 25px;
   }
