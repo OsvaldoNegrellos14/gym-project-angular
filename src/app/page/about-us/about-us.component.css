@@ -1,0 +1,203 @@
+/*Repetitivo*/
+.section-title {
+  margin-bottom: 45px;
+}
+
+.section-title h2 {
+  color: #191919;
+  font-size: 36px;
+  font-weight: 500;
+  padding-left: 12px;
+  margin-bottom: 20px;
+  line-height: 26px;
+  position: relative;
+}
+.section-title h2:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 29px;
+  background: #f34e3a;
+  content: "";
+}
+
+.section-title p {
+  color: white;
+  line-height: 24px;
+}
+.spad {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/*---------------------
+  Breadcrumb Section
+-----------------------*/
+.breadcrumb-section {
+  height: 200px;
+  padding-top: 55px;
+  background-image: url('/assets/img/about-breadcrumb-bg.jpg');
+}
+
+.site-text {
+  text-align: center;
+}
+.site-text h2 {
+  color: #ffffff;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.site-text .site-breadcrumb .sb-item {
+  color: #ffffff;
+  font-size: 14px;
+  margin-right: 20px;
+  position: relative;
+}
+.site-text .site-breadcrumb .sb-item:last-child {
+  margin-right: 0;
+}
+.site-text .site-breadcrumb .sb-item:last-child:after {
+  display: none;
+}
+.site-text .site-breadcrumb .sb-item:after {
+  position: absolute;
+  right: -15px;
+  top: -1px;
+  content: "";
+  font-family: "FontAwesome";
+}
+
+/*---------------------
+  About Us
+-----------------------*/
+.about-us-section .about-pic {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.about-us-section .about-pic img {
+  min-width: 100%;
+}
+
+.about-text {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.about-text .section-title {
+  margin-bottom: 20px;
+}
+.about-text .section-title h2 {
+  font-weight: 600;
+}
+.about-text .section-title p {
+  font-size: 20px;
+  color: #191919;
+  line-height: 28px;
+  font-weight: 500;
+}
+.about-text p {
+  color: #6e6e6e;
+  line-height: 24px;
+}
+/*---------------------
+  Chose Section
+-----------------------*/
+.choseus-section{
+  background-image: url('/assets/img/chose-us-bg.jpg');
+  background-repeat: no-repeat;
+}
+.choseus-section, .about-page-trainer {
+  padding-bottom: 66px;
+}
+.choseus-section .section-title h2, .about-page-trainer .section-title h2 {
+  color: #ffffff;
+  margin-bottom: 2.8rem;
+}
+.choseus-section .section-title h2:before, .about-page-trainer .section-title h2:before {
+  background: #ffffff;
+  width: 70px;
+  height: 3px;
+  right: 0;
+  left: 0;
+  top: 49px;
+  margin: 0 auto;
+}
+.chose-items .ci-item {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.chose-items .ci-item i {
+  font-size: 48px;
+  color: #ffffff;
+}
+.chose-items .ci-item h5 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  margin-top: 22px;
+}
+.chose-items .ci-item p {
+  color: #ffffff;
+  line-height: 24px;
+}
+/*---------------------
+  About Page Trainer
+-----------------------*/
+.about-page-trainer {
+  padding-bottom: 70px;
+}
+.about-page-trainer .section-title h2 {
+  color: #191919;
+  font-weight: 600;
+}
+.about-page-trainer .section-title h2:before {
+  background: #f34e3a;
+}
+.about-page-trainer .section-title p {
+  color: #6e6e6e;
+}
+.about-page-trainer .single-trainer-item {
+  text-align: center;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.about-page-trainer .single-trainer-item:hover {
+  -webkit-box-shadow: 1px 2px 30px 5px #d8d8d8;
+  box-shadow: 1px 2px 30px 5px #d8d8d8;
+}
+.about-page-trainer .single-trainer-item .trainer-pic img {
+  max-width: 100%;
+}
+.about-page-trainer .single-trainer-item .trainer-text {
+  padding: 25px 30px 25px;
+}
+.about-page-trainer .single-trainer-item .trainer-text h5 {
+  color: #191919;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.about-page-trainer .single-trainer-item .trainer-text span {
+  color: #6e6e6e;
+  font-size: 16px;
+  line-height: 30px;
+  display: block;
+  margin-bottom: 14px;
+}
+.about-page-trainer .single-trainer-item .trainer-text .trainer-social {
+  border-top: 1px solid #ebebeb;
+  padding-top: 15px;
+}
+.about-page-trainer .single-trainer-item .trainer-text .trainer-social a {
+  display: inline-block;
+  color: #6e6e6e;
+  font-size: 14px;
+  margin-right: 26px;
+}
+.about-page-trainer .single-trainer-item .trainer-text .trainer-social a:last-child {
+  margin-right: 0;
+}

@@ -527,6 +527,13 @@ ol {
 .lead{
   margin-bottom: 12rem;
 }
+.lead h1{
+  margin-bottom: 5rem;
+  letter-spacing: 2rem;
+}
+.lead h4 {
+  letter-spacing: .4rem;
+}
 
 /*---------------------
   Services Section
@@ -2049,18 +2056,20 @@ ol {
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1201px) and (max-width: 1284px) {
   .container {
     max-width: 1170px;
   }
   .lead {
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
   }
+
 }
 /* Medium Device = 1200px */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .lead {
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .lead{
     margin-bottom: 0;
+    font-size: 1rem;
   }
   .latest-items .latest-text .latest-tag .tag-comments {
     margin-left: 15px;
@@ -2129,8 +2138,13 @@ ol {
   .lead {
     margin-bottom: 0;
   }
+  .lead h4{
+    font-size: 1.5rem !important;
+    letter-spacing: .4rem;
+  }
   .lead h1 {
-    font-size: 3.5rem !important;
+    font-size: 3rem !important;
+    letter-spacing: .8rem;
   }
   .nav-menu .mainmenu ul li {
     margin-right: 25px;
