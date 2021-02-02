@@ -11,6 +11,7 @@ import { BlogComponent } from './page/blog/blog.component';
 import { BlogDetailsComponent } from './page/blog-details/blog-details.component';
 import { ContactComponent } from './page/contact/contact.component';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
