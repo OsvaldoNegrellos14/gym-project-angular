@@ -712,7 +712,7 @@ ol {
 /*---------------------
   Trainer Section
 -----------------------*/
-.trainer-schedule{
+.trainer-schedule-bg{
   background-image: url('/assets/img/trainer-bg.jpg');
 }
 .trainer-schedule.class-timetable .section-title h2, .class-timetable.choseus-section .section-title h2, .class-timetable.about-page-trainer .section-title h2 {
