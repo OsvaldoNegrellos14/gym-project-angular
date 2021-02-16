@@ -1,0 +1,42 @@
+body{
+    background-image: url('https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.formulario{
+    background: rgba(255,-0,-0, .2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow:0 0 30px rgba(255, -0, -0, .2);
+    color: white;
+
+}
+.form-control{
+    background: rgba(255, -0, -0, .3);
+    border-style: none;
+    transition: 0.5s ease-in;
+    outline: none;
+    box-shadow: none;
+}
+.form-control:focus{
+    background: none;
+    outline: none;
+    box-shadow: none;
+}
+.form-control:hover{
+    color: white;
+}
+.formulario input, h1{
+    text-transform: uppercase;
+}
+.ingresar{
+    background: rgba(255,-0,-0, .8);
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    transition: 0.5s ease-in;
+}
+.ingresar:hover{
+    color:white
+}

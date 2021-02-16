@@ -14,6 +14,7 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {SharedModule} from './shared/shared.module';
 import {AngularFireModule} from '@angular/fire';
 import { FireService } from './services/fire.service';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FireService } from './services/fire.service';
     BlogComponent,
     BlogDetailsComponent,
     ContactComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
