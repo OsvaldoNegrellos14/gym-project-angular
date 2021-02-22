@@ -5,20 +5,20 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import {RouterModule} from '@angular/router';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, ContactComponent],
+  declarations: [NavbarComponent, FooterComponent, ContactComponent, SidenavComponent],
   imports: [
     CommonModule,
     RouterModule,
-    CollapseModule,
-    BrowserAnimationsModule
+    CollapseModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    SidenavComponent
   ]
 })
 export class SharedModule { }

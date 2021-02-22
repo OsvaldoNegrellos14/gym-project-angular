@@ -7,11 +7,11 @@ import {GalleryComponent} from './page/gallery/gallery.component';
 import {BlogComponent} from './page/blog/blog.component';
 import {ContactComponent} from './page/contact/contact.component';
 import {BlogDetailsComponent} from './page/blog-details/blog-details.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SignInComponent } from './page/sign-in/sign-in.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'signin', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'signin', component: SignInComponent},
   { path: 'home', component: IndexComponent },
   { path: 'aboutus', component: AboutUsComponent },
@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'portfolio', component: GalleryComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'blog-details', component: BlogDetailsComponent }
+  { path: 'blog-details', component: BlogDetailsComponent },
+  { path: '', loadChildren: () => import('./page/admin/admin.module').then( m => m.AdminModule ) }
 ];
 
 @NgModule({

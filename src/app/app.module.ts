@@ -13,8 +13,11 @@ import { ContactComponent } from './page/contact/contact.component';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {SharedModule} from './shared/shared.module';
 import {AngularFireModule} from '@angular/fire';
+import { AngularFireAuth} from "@angular/fire/auth";
 import { FireService } from './services/fire.service';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SignInComponent } from './page/sign-in/sign-in.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,12 @@ import { SignInComponent } from './sign-in/sign-in.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CarouselModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyD_Q3XUZ4RnNU9X9KkLGD6rFKbPUoDgwrw",
       authDomain: "gym-utt.firebaseapp.com",
@@ -43,7 +49,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
       measurementId: "G-450HD2E26H"
     })
   ],
-  providers: [FireService],
+  providers: [FireService, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

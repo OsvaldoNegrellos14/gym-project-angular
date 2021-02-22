@@ -1,24 +1,25 @@
 <body>
+    <app-navbar></app-navbar>
     <div class="container">
         <div class="row justify-content-center pt-5">
             <!--Inicio de formulario-->
             <div class="col-md-4 formulario">
-                <form action="" class="text-center">
+                <form action="" class="text-center" [formGroup]="user">
                     <div class="form-group">
                         <h1 class="text-light">Iniciar sesión</h1>
                     </div>
                     <!--Inputs formulario-->
                     <div class="form-group mx-sm-4 pt-3">
                         <span style='font-size: 12pt; font-weight: bold; color: white; text-align: center;'>Correo</span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="email" id="email" formControlName="email">
                     </div>
                     <div class="form-group mx-sm-4 pb-3">
                         <span style='font-size: 12pt; font-weight: bold; color: white; text-align: center;'>Contraseña</span>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" name="password" id="password" formControlName="password">
                     </div>
                     <div class="form-group mx-sm-4 pb-3">
-                        <input type="submit" class="btn btn-block ingresar" value="INGRESAR">
-                        <input type="submit" class="btn btn-block ingresar" value="CREAR CUENTA">
+                        <input type="submit" class="btn btn-block ingresar" value="INGRESAR" (click)="onSignIn()">
+                        <button type="submit" class="btn btn-block ingresar" value="" (click)="onSignUp()">CREAR CUENTA</button>
                     </div>
                 </form>
             </div>
