@@ -26,7 +26,7 @@ isLoggin = false
     this.firebaseAuth.signOut().then(()=>{
       this.isLoggin = false;
       localStorage.removeItem('user');
-      this.route.navigateByUrl('home', {skipLocationChange: true}).then(()=>{
+      this.route.navigateByUrl('signin', {skipLocationChange: true}).then(()=>{
         this.route.navigate(['home']);
       })
     })
