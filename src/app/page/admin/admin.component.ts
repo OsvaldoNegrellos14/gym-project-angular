@@ -9,7 +9,7 @@ import { FireService } from 'src/app/services/fire.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private firebasService: FireService, private route: Router) { }
+  constructor(private firebaseService: FireService, private route: Router) { }
   isSigned = false;
   ngOnInit() {
     if(localStorage.getItem('user') !== null){
@@ -18,6 +18,13 @@ export class AdminComponent implements OnInit {
       this.isSigned = false;
       this.route.navigateByUrl('signin');
     }
+  }
+
+  logout() {
+    this.firebaseService.logOut();
+    //this.isLogout.emit();
+    localStorage.removeItem('user');
+    this.route.navigateByUrl('signin');
   }
 
 }

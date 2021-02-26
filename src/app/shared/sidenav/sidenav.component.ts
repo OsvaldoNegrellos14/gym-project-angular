@@ -10,16 +10,23 @@ import { FireService } from 'src/app/services/fire.service';
 export class SidenavComponent implements OnInit {
 
   //@Output() isLogout = new EventEmitter<void>();
-  constructor(public firebaseService: FireService, private route: Router) { }
+  path: string;
+  constructor(public firebaseService: FireService, private route: Router) {
+    this.path = route.url;
+  }
 
   ngOnInit() {
   }
 
-  logout() {
-    this.firebaseService.logOut();
-    //this.isLogout.emit();
-    localStorage.removeItem('user');
-    this.route.navigateByUrl('signin');
+  // logout() {
+  //   this.firebaseService.logOut();
+  //   //this.isLogout.emit();
+  //   localStorage.removeItem('user');
+  //   this.route.navigateByUrl('signin');
+  // }
+
+  onEvent(url) {
+    this.path = url;
   }
 
 }
