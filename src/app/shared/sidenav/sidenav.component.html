@@ -4,50 +4,50 @@
   <ul class="nav flex-column">
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/home'}" [routerLink]="['/admin/home']" (click) = "onEvent('/admin/home')">
-        <span data-feather="home"></span>
+        <span data-feather="home"><i class="fa fa-home"></i></span>
         Inicio
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/users'}" [routerLink]="['/admin/users']" (click) = "onEvent('/admin/users')">
-        <span data-feather="file"></span>
+        <span data-feather="file"><i class="fa fa-users" aria-hidden="true"></i></span>
         Usuarios
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/gallery'}" [routerLink]="['/admin/gallery']" (click) = "onEvent('/admin/gallery')">
-        <span data-feather="shopping-cart"></span>
+        <span data-feather="shopping-cart"><i class="fa fa-picture-o"></i></span>
         Galeria
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/routines'}" [routerLink]="['/admin/routines']" (click) = "onEvent('/admin/routines')">
-        <span data-feather="users"></span>
+        <span data-feather="users"><i class="fa fa-male"></i></span>
         Rutinas
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/diets'}" [routerLink]="['/admin/diets']" (click) = "onEvent('/admin/diets')">
-        <span data-feather="bar-chart-2"></span>
+        <span data-feather="bar-chart-2"><i class="fa fa-cutlery"></i></span>
         Dietas
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/blog'}" [routerLink]="['/admin/blog']" (click) = "onEvent('/admin/blog')">
-        <span data-feather="users"></span>
+        <span data-feather="users"><i class="fa fa-newspaper-o"></i></span>
         Noticias
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/notifications'}" [routerLink]="['/admin/notifications']" (click) = "onEvent('/admin/notifications')">
-        <span data-feather="bar-chart-2"></span>
-        Notificaciones
+        <span data-feather="bar-chart-2"><i class="fa fa-bell"></i></span>
+        Notificaciones (Pendiente a revisar)
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{'active': path == '/admin/settings'}" [routerLink]="['/admin/settings']" (click) = "onEvent('/admin/settings')">
-        <span data-feather="layers"></span>
-        Configuraciones
+        <span data-feather="layers"><i class="fa fa-user-circle-o"></i></span>
+        Cuenta
       </a>
     </li>
   </ul>
