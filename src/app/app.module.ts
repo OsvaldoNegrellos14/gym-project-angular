@@ -18,6 +18,7 @@ import { FireService } from './services/fire.service';
 import { SignInComponent } from './page/sign-in/sign-in.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       messagingSenderId: "1011619827046",
       appId: "1:1011619827046:web:59e258d018d689bb06cca7",
       measurementId: "G-450HD2E26H"
-    })
+    }),
+    ModalModule.forRoot()
   ],
   providers: [FireService, AngularFireAuth],
   bootstrap: [AppComponent]
