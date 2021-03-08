@@ -26,12 +26,11 @@ export class SignInComponent implements OnInit {
     }
   }
 
-  async onSignUp() {
-    console.log(this.user.value.email, this.user.value.password);
+  async onSignUp(template: TemplateRef<any>) {
     await this.firebaseService.signUp(this.user.value.email, this.user.value.password);
     if (this.firebaseService.isLoggin) {
+      this.openModal(template);
       this.isSignedIn = true;
-      this.route.navigateByUrl('admin')
     }
   }
 
@@ -39,15 +38,18 @@ export class SignInComponent implements OnInit {
     await this.firebaseService.signIn(this.user.value.email, this.user.value.password);
     if (this.firebaseService.isLoggin) {
       this.isSignedIn = true;
-      this.route.navigateByUrl('admin')
+      this.route.navigateByUrl('admin');
     }
   }
-  async openModal(template: TemplateRef<any>) {
-    await this.onSignUp();
-    console.log(this.firebaseService.isLoggin)
+  openModal(template: TemplateRef<any>) {
     if (this.firebaseService.isLoggin == true) {
       this.modalRef = this.modalService.show(template);
     }
+  }
+
+  confirm() {
+    this.route.navigateByUrl('admin');
+    this.modalRef.hide();
   }
 
 }

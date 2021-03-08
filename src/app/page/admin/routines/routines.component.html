@@ -1,119 +1,113 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
-  <h1 class="h2">Rutinas preparadas para agendar a los usuarios</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">ALL ROUTINES</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
-    <button type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+    <button type="button" class="btn btn-sm primary-btn" (click)="addRoutineModal.show()">
+      <i class="fa fa-plus"></i>
+    </button>
   </div>
 </div>
+
+<!--ADD ROUTINE MODAL-->
+<div bsModal #addRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">ADD A NEW ROUTINE</h4>
+        <button type="button" class="close pull-right" (click)="addRoutineModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <form class="text-center">
+          <div class="form-group">
+            <label for="title">
+              <h5>TITLE</h5>
+            </label>
+            <input type="text" class="form-control" id="title">
+          </div>
+          <div class="form-group">
+            <label for="content">
+              <h5>CONTENT</h5>
+            </label>
+            <textarea class="form-control" id="content" rows="8"></textarea>
+          </div>
+          <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
+          <div class="form-group mb-3 row">
+            <div class="col-lg-6 mb-3 input-file">
+              <label for="image">
+                <h5>SELECT IMAGE</h5>
+              </label>
+              <input type="file" class="form-control-file" id="image">
+            </div>
+            <div class="col-lg-6">
+              <label for="alt">
+                <h5>ALTERNATIVE TEXT</h5>
+              </label>
+              <input type="text" class="form-control" id="alt">
+            </div>
+          </div>
+          <div *ngIf="preview">
+            <label class="text-center">
+              <h5>IMAGE PREVIEW</h5>
+            </label>
+            <div class="preview ml-auto mr-auto text-center p-3 w-75">
+              <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center d-block">
+        <button type="button" class="btn primary-btn w-50">
+          POST
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--ROUTINE CARDS-->
 <div class="grey-bg container-fluid">
   <section id="minimal-statistics">
     <div class="row">
       <div class="col-12 mt-3 mb-1">
-        <h4 class="text-uppercase">Minimal Statistics Cards</h4>
-        <p>Statistics on minimal cards.</p>
+        <h4 class="text-uppercase">ROUTINES STATISTICS</h4>
       </div>
     </div>
     <div class="row">
       <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="align-self-center">
-                  <i class="icon-pencil primary font-large-2 float-left"></i>
-                </div>
-                <div class="media-body text-right">
-                  <h3>278</h3>
-                  <span>New Posts</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="align-self-center">
-                  <i class="icon-speech warning font-large-2 float-left"></i>
-                </div>
-                <div class="media-body text-right">
-                  <h3>156</h3>
-                  <span>New Comments</span>
+        <div class="card"
+          style="background-image: url('https://picsum.photos/500'); border: 1px solid #ccc; background-size: cover;">
+          <!--EDIT AND DELETE BUTTONS-->
+          <a type="button" class="btn btn-edit text-center" (click)="editRoutineModal.show()">
+            <i class="fa fa-pencil-square-o"></i>
+          </a>
+          <a type="button" class="btn btn-delete text-center" (click)="deleteRoutineModal.show()">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </a>
+          <!--------------------------->
+          <div class="background" style="background: rgba(0, 0, 0, 0.5); color: white !important;">
+            <div class="card-content">
+              <div class="card-body pb-5">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-pencil primary font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-left">
+                    <h3 class="text-white">278</h3>
+                    <span>Users</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="align-self-center">
-                  <i class="icon-graph success font-large-2 float-left"></i>
-                </div>
-                <div class="media-body text-right">
-                  <h3>64.89 %</h3>
-                  <span>Bounce Rate</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="align-self-center">
-                  <i class="icon-pointer danger font-large-2 float-left"></i>
-                </div>
-                <div class="media-body text-right">
-                  <h3>423</h3>
-                  <span>Total Visits</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="danger">278</h3>
-                  <span>New Projects</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-rocket danger font-large-2 float-right"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="success">156</h3>
-                  <span>New Clients</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-user success font-large-2 float-right"></i>
+              <div class="card-body" style="border-top: 1px solid #ccc;">
+                <div class="media d-flex">
+                  <div class="media-body text-right">
+                    <h3 class="text-white">278</h3>
+                    <span>Views</span>
+                  </div>
+                  <div class="align-self-center">
+                    <i class="icon-rocket danger font-large-2 float-right"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -121,42 +115,87 @@
         </div>
       </div>
 
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="warning">64.89 %</h3>
-                  <span>Conversion Rate</span>
+      <!--EDIT ROUTINE MODAL-->
+      <div bsModal #editRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="dialog-sizes-name1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT ROUTINE</h4>
+              <button type="button" class="close pull-right" (click)="editRoutineModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-4">
+              <form class="text-center">
+                <div class="form-group">
+                  <label for="editTitle">
+                    <h5>TITLE</h5>
+                  </label>
+                  <input type="text" class="form-control text-center" id="editTitle" value="News title">
                 </div>
-                <div class="align-self-center">
-                  <i
-                    class="icon-pie-chart warning font-large-2 float-right"
-                  ></i>
+                <div class="form-group">
+                  <label for="editContent">
+                    <h5>CONTENT</h5>
+                  </label>
+                  <textarea class="form-control" id="editContent" rows="8"></textarea>
                 </div>
-              </div>
+                <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
+                <div class="form-group mb-3 row">
+                  <div class="col-lg-6 mb-3 input-file">
+                    <label for="editImage">
+                      <h5>SELECT A NEW IMAGE</h5>
+                    </label>
+                    <input type="file" class="form-control-file" id="editImage">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="editAlt">
+                      <h5>ALTERNATIVE TEXT</h5>
+                    </label>
+                    <input type="text" class="form-control text-center" id="editAlt" value="Alternative text">
+                  </div>
+                </div>
+                <div *ngIf="preview">
+                  <label class="text-center">
+                    <h5>NEW IMAGE PREVIEW</h5>
+                  </label>
+                  <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                    <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer text-center d-block">
+              <button type="button" class="btn primary-btn w-50">
+                SAVE CHANGES
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-body">
-              <div class="media d-flex">
-                <div class="media-body text-left">
-                  <h3 class="primary">423</h3>
-                  <span>Support Tickets</span>
-                </div>
-                <div class="align-self-center">
-                  <i class="icon-support primary font-large-2 float-right"></i>
-                </div>
-              </div>
+
+      <!--DELETE ROUTINE MODAL-->
+      <div bsModal #deleteRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="dialog-sizes-name1">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE ROUTINE</h4>
+              <button type="button" class="close pull-right"
+                (click)="deleteRoutineModal.hide();" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center p-4">
+              <p>Do you want to confirm?</p>
+              <button type="button" class="btn secondary-btn mr-1" (click)="confirm(); this.deleteRoutineModal.hide()">Yes, delete it</button>
+              <button type="button" class="btn primary-btn ml-1"
+                (click)="decline(); this.deleteRoutineModal.hide()">No, thanks</button>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 </div>

@@ -12,6 +12,10 @@ body {
  * Navbar
  */
 
+ .navbar {
+   background-color: #262832 !important;
+ }
+ 
  .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
@@ -41,3 +45,8 @@ body {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
+
+  .bg-black {
+    background-color: #262832 !important;
+  }
+

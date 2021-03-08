@@ -12,4 +12,12 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
   }
 
+  confirm() {
+    console.log("Subscription removed");
+  }
+
+  decline() {
+    console.log("Operation canceled");
+  }
+
 }

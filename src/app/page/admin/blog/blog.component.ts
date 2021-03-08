@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
 
+  preview = true;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  confirm() {
+    console.log("Blog deleted");
+  }
+
+  decline() {
+    console.log("Operation canceled");
   }
 
 }

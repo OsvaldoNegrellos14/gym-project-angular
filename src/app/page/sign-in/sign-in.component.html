@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group mx-sm-4 pb-3">
                         <input type="submit" class="btn btn-block ingresar" value="INGRESAR" (click)="onSignIn()">
-                        <button type="submit" class="btn btn-block ingresar" value="" (click)="openModal(template)">CREAR
+                        <button type="submit" class="btn btn-block ingresar" value="" (click)="onSignUp(template)">CREAR
                             CUENTA</button>
                     </div>
                 </form>
@@ -33,8 +33,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        Te has registrado con éxito.
+                    <div class="modal-body text-center">
+                        <p>Te has registrado con éxito.</p>
+                        <button type="button" class="ml-auto mr-auto btn btn-primary" (click)="confirm()" >Continuar</button>
                     </div>
                 </ng-template>
             </div>
