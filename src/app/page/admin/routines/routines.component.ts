@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoutinesComponent implements OnInit {
 
-  constructor() { }
+  preview = true;
+  constructor() {
+
+   }
 
   ngOnInit() {
+  }
+
+  confirm() {
+    console.log("Routine deleted");
+  }
+
+  decline() {
+    console.log("Operation canceled");
   }
 
 }

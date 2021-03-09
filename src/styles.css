@@ -167,6 +167,55 @@ ol {
   color: #ffffff;
 }
 
+/* Dashboard*/
+.upload {
+  border-bottom: 1px solid #ccc;
+}
+
+.preview {
+  height: auto;
+  border: dotted #ccc;
+  border-radius: .5rem;
+}
+
+.input-file {
+  border-right: 1px solid #ccc;
+}
+
+@media screen and (max-width: 992px) {
+  .upload {
+      border-right: none;
+  }
+  .content {
+      border-bottom: none;
+      padding-bottom: 0px !important;
+  }
+}
+
+.card-img {
+  transition: 300ms;
+  height: 26rem !important;
+  max-height: 26rem;
+  object-fit: cover;
+}
+
+.card-img-top {
+  transition: 300ms;
+  object-fit: cover;
+}
+
+.card-list {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  list-style: none;
+  padding: .5rem 1.5rem .5rem 1.5rem !important;
+}
+
+.card-list p {
+  margin: 0;
+  margin-left: auto !important;
+}
+
 /* buttons */
 .primary-btn {
   display: inline-block;
@@ -174,10 +223,68 @@ ol {
   font-family: "Oswald", sans-serif;
   padding: 12px 39px;
   color: #ffffff;
-  background: #f34e3a;
+  background: #f34e3a !important;
   line-height: normal;
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-decoration: none !important;
+  transition: 300ms;
+}
+
+.primary-btn:hover {
+  transition: 300ms;
+  color: #ffffff !important;
+  background-color: #e72914 !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.secondary-btn {
+  border: 1px solid #f34e3a !important;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+.secondary-btn:hover {
+  color: #fff !important;
+  background-color: #f34e3a !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-edit {
+  transition: 300ms;
+  color: black !important;
+  font-size: 1.5rem !important;
+  width: 19%;
+  position: absolute;
+  top: .5rem;
+  right: 0rem;
+  margin-left: auto;
+  z-index: 10;
+  transition: .3s ease !important;
+  background-color: rgba(243, 78, 58, 0.5) !important;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  transition: 300ms;
+  color: #ffffff !important;
+  width: 30%;
+  border-right: 4px solid #fff;
+  /*background-color: rgba(255, 255, 255, 0.5);*/
+  background-color: #f34e3a !important;
+}
+
+.btn-delete {
+  transition: 300ms;
+  color: black !important;
+  font-size: 1.5rem !important;
+  width: 19%;
+  position: absolute;
+  top: 4rem;
+  right: 0rem;
+  margin-left: auto;
+  z-index: 10;
+  transition: .3s ease !important;
+  background-color: rgba(243, 78, 58, 0.5) !important;
 }
 
 /* Preloder */

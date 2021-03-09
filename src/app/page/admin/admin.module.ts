@@ -12,6 +12,7 @@ import { DietsComponent } from './diets/diets.component';
 import { BlogComponent } from './blog/blog.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SettingsComponent } from './settings/settings.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    ModalModule.forRoot()
   ]
 })
 export class AdminModule { }

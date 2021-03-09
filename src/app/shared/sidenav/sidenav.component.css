@@ -35,8 +35,11 @@
 }
 
 .sidebar .nav-link {
+  transition: .4s;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: #333;
+  color: #fff;
+  letter-spacing: 1px;
 }
 
 .sidebar .nav-link .feather {
@@ -45,15 +48,57 @@
 }
 
 .sidebar .nav-link.active {
-  color: #007bff;
+  color: black;
+  border-left: 6px solid #f34e3a;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.sidebar .nav-link:hover {
+  transition: .4s;
+}
+
+.sidebar .nav-link::after {
+  content: "";
+  display: block;
+  width: 0%;
+  border-bottom: 1px solid #fff;
+  transition: .6s;
+}
+
+.sidebar .nav-link:hover:after {
+  transition: .6s;
+  width: 100% !important;
 }
 
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
   color: inherit;
+  border-bottom: 0px solid;
+  border-bottom-width: 0;
 }
 
 .sidebar-heading {
   font-size: 0.75rem;
   text-transform: uppercase;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 100;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 100;}
+}
+
+.bg {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: .4s;
+  animation-duration: .4s;
+  background-image: url('/assets/sidenavbg.jpg');
+  background-size: 20rem 52rem;
+  background-repeat: no-repeat;
+  filter: contrast(90%);
 }

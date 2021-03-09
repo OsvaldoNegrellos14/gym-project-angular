@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalleryComponent implements OnInit {
 
+  preview = true;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  confirm() {
+    console.log("Image deleted");
+  }
+
+  decline() {
+    console.log("Operation canceled");
   }
 
 }
