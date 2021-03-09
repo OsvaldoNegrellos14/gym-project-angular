@@ -1,44 +1,58 @@
 <body>
-    <app-navbar></app-navbar>
-    <div class="container">
-        <div class="row justify-content-center pt-5">
-            <!--Inicio de formulario-->
-            <div class="col-md-4 formulario">
-                <form action="" class="text-center" [formGroup]="user">
-                    <div class="form-group">
-                        <h1 class="text-light">Iniciar sesión</h1>
-                    </div>
-                    <!--Inputs formulario-->
-                    <div class="form-group mx-sm-4 pt-3">
-                        <span
-                            style='font-size: 12pt; font-weight: bold; color: white; text-align: center;'>Correo</span>
-                        <input type="text" class="form-control" name="email" id="email" formControlName="email">
-                    </div>
-                    <div class="form-group mx-sm-4 pb-3">
-                        <span
-                            style='font-size: 12pt; font-weight: bold; color: white; text-align: center;'>Contraseña</span>
-                        <input type="password" class="form-control" name="password" id="password"
-                            formControlName="password">
-                    </div>
-                    <div class="form-group mx-sm-4 pb-3">
-                        <input type="submit" class="btn btn-block ingresar" value="INGRESAR" (click)="onSignIn()">
-                        <button type="submit" class="btn btn-block ingresar" value="" (click)="onSignUp(template)">CREAR
-                            CUENTA</button>
-                    </div>
-                </form>
-                <ng-template #template>
-                    <div class="modal-header">
-                        <h4 class="modal-title pull-left">Registro con éxito.</h4>
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p>Te has registrado con éxito.</p>
-                        <button type="button" class="ml-auto mr-auto btn btn-primary" (click)="confirm()" >Continuar</button>
-                    </div>
-                </ng-template>
+  <app-navbar></app-navbar>
+  <div class="container">
+    <div class="row justify-content-center pt-5">
+      <!--Inicio de formulario-->
+      <div class="col-md-4 formulario">
+        <form action="" class="text-center" [formGroup]="user">
+          <div class="form-group">
+            <h1 class="text-light">Iniciar sesión</h1>
+          </div>
+          <!--Inputs formulario-->
+          <div class="form-group mx-sm-4 pt-3">
+            <span style='font-size: 12pt; font-weight: bold; color: white; text-align: center;'>Correo</span>
+            <input type="text" class="form-control" name="email" id="email" formControlName="email">
+            <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div class="container-error-message" *ngIf="email.errors.required">
+                Correo requerido
+              </div>
+              <div class="container-error-message"
+                *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.pattern">
+                Correo electronico invalido
+              </div>
             </div>
-        </div>
+          </div>
+          <div class="form-group mx-sm-4 pb-3">
+            <span style='font-size: 12pt; font-weight: bold; color: white; text-align: center;'>Contraseña</span>
+            <input type="password" class="form-control" name="password" id="password" formControlName="password">
+            <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div class="container-error-message" *ngIf="password.errors.required">
+                Contraseña requerida
+              </div>
+              <div class="container-error-message" *ngIf="password.errors.minlength">
+                La contraseña debe de tener más 6 caracteres
+              </div>
+            </div>
+          </div>
+          <div class="form-group mx-sm-4 pb-3">
+            <input type="submit" class="btn btn-block ingresar" value="INGRESAR" disable="!contactForm.valid" (click)="onSignIn()">
+            <button type="submit" class="btn btn-block ingresar" value="" disable="!contactForm.valid" (click)="onSignUp(template)">CREAR
+              CUENTA</button>
+          </div>
+        </form>
+        <ng-template #template>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Registro con éxito.</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p>Te has registrado con éxito.</p>
+            <button type="button" class="ml-auto mr-auto btn btn-primary" (click)="confirm()">Continuar</button>
+          </div>
+        </ng-template>
+      </div>
     </div>
+  </div>
 </body>
