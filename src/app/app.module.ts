@@ -19,6 +19,7 @@ import { SignInComponent } from './page/sign-in/sign-in.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyD_Q3XUZ4RnNU9X9KkLGD6rFKbPUoDgwrw",
       authDomain: "gym-utt.firebaseapp.com",
