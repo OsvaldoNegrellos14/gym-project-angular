@@ -1,6 +1,4 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Configuraciones de la cuenta del GYM</h1>
 </div>
 
@@ -8,7 +6,8 @@
   <div class="form-group row">
     <label for="inputNameGym" class="col-sm-4 col-form-label">Nombre del gimnasio</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputNameGym" placeholder="Nombre del gym" value="contacto5@krypton.com">
+      <input type="text" class="form-control" id="inputNameGym" placeholder="Nombre del gym"
+        value="contacto5@krypton.com">
     </div>
   </div>
   <div class="form-group row">
@@ -33,33 +32,331 @@
   <h5>Redes sociales</h5>
   <br>
   <div class="form-group row">
-    <div class="col-sm-2"><i class="fa fa-facebook-square" aria-hidden="true" style="font-size: 30px; color: #3b5998;"></i></div>
+    <div class="col-sm-2"><i class="fa fa-facebook-square" aria-hidden="true"
+        style="font-size: 30px; color: #3b5998;"></i></div>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio" value="https://www.facebook.com/KryptonOficial">
+      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio"
+        value="https://www.facebook.com/KryptonOficial">
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-2"><i class="fa fa-instagram" aria-hidden="true" style="font-size: 30px; color: #3f729b;"></i></div>
+    <div class="col-sm-2"><i class="fa fa-instagram" aria-hidden="true" style="font-size: 30px; color: #3f729b;"></i>
+    </div>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio" value="https://www.instagram.com/KryptonOficial">
+      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio"
+        value="https://www.instagram.com/KryptonOficial">
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-2"><i class="fa fa-twitter-square" aria-hidden="true" style="font-size: 30px; color: #00acee;"></i></div>
+    <div class="col-sm-2"><i class="fa fa-twitter-square" aria-hidden="true"
+        style="font-size: 30px; color: #00acee;"></i></div>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio" value="https://www.twitter.com/KryptonOficial">
+      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio"
+        value="https://www.twitter.com/KryptonOficial">
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-2"><i class="fa fa-youtube-square" aria-hidden="true" style="font-size: 30px; color: #c4302b;"></i></div>
+    <div class="col-sm-2"><i class="fa fa-youtube-square" aria-hidden="true"
+        style="font-size: 30px; color: #c4302b;"></i></div>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio" value="https://www.youtube.com/KryptonOficial">
+      <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio"
+        value="https://www.youtube.com/KryptonOficial">
     </div>
   </div>
 
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-success">Save</button>
+      <button type="submit" class="btn primary-btn ml-auto mr-auto d-block">Save</button>
     </div>
   </div>
 </form>
+
+<div class="row">
+  <h5 class="w-50 ml-auto mr-auto">Coaches</h5>
+  <button type="button" class="btn btn-sm primary-btn mr-auto" (click)="addCoachModal.show()">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+
+<!--ADD COACH MODAL-->
+<div bsModal #addCoachModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">add a new coach</h4>
+        <button type="button" class="close pull-right" (click)="addCoachModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <form class="text-center">
+          <div class="form-group">
+            <label for="title">
+              <h5>name</h5>
+            </label>
+            <input type="text" class="form-control" id="title">
+          </div>
+          <div class="form-row mb-3 mt-4">
+            <div class="col">
+              <label for="specialty">
+                <h5>specialty</h5>
+              </label>
+              <input type="text" class="form-control" id="specialty">
+            </div>
+            <div class="col">
+              <label for="rol">
+                <h5>rol</h5>
+              </label>
+              <input type="text" class="form-control" id="rol">
+            </div>
+          </div>
+          <div class="form-group mt-4">
+            <label for="content">
+              <h5>Biography</h5>
+            </label>
+            <textarea class="form-control" id="content" rows="8"></textarea>
+          </div>
+          <h5 class="upload pb-3 mt-5">social</h5>
+          <div class="form-row mb-3">
+            <div class="col first">
+              <label for="title">
+                <h5>facebook</h5>
+              </label>
+              <input type="text" class="form-control" id="title">
+            </div>
+            <div class="col">
+              <label for="rol">
+                <h5>twitter</h5>
+              </label>
+              <input type="text" class="form-control" id="rol">
+            </div>
+          </div>
+          <div class="form-row mb-5">
+            <div class="col">
+              <label for="title">
+                <h5>instagram</h5>
+              </label>
+              <input type="text" class="form-control" id="title">
+            </div>
+            <div class="col">
+              <label for="rol">
+                <h5>youtube</h5>
+              </label>
+              <input type="text" class="form-control" id="rol">
+            </div>
+          </div>
+          <h5 class="upload pb-3 mt-4">UPLOAD AN IMAGE</h5>
+          <div class="form-group mb-3 row">
+            <div class="col-lg-6 mb-3 input-file">
+              <label for="image">
+                <h5>SELECT IMAGE</h5>
+              </label>
+              <input type="file" class="form-control-file" id="image">
+            </div>
+            <div class="col-lg-6">
+              <label for="alt">
+                <h5>ALTERNATIVE TEXT</h5>
+              </label>
+              <input type="text" class="form-control" id="alt">
+            </div>
+          </div>
+          <div *ngIf="preview">
+            <label class="text-center">
+              <h5>IMAGE PREVIEW</h5>
+            </label>
+            <div class="preview ml-auto mr-auto text-center p-3 w-75">
+              <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center d-block">
+        <button type="button" class="btn primary-btn w-50">
+          POST
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------------------------------------->
+
+<div class="coaches ml-auto mr-auto mt-3">
+  <div class="card-columns w-75 mr-auto ml-auto mt-4">
+    <div class="card">
+      <img class="card-img-top" src="https://picsum.photos/300" alt="Card image cap">
+      <!--EDIT AND DELETE BUTTONS-->
+      <a type="button" class="btn btn-edit text-center" (click)="editCoachModal.show()">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a type="button" class="btn btn-delete text-center" (click)="deleteCoachModal.show()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+      <!--------------------------->
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+      </div>
+    </div>
+
+    <!--EDIT COACH MODAL-->
+    <div bsModal #editCoachModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="dialog-sizes-name1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">Edit coach info</h4>
+            <button type="button" class="close pull-right" (click)="editCoachModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-4">
+            <form class="text-center">
+              <div class="form-group">
+                <label for="title">
+                  <h5>name</h5>
+                </label>
+                <input type="text" class="form-control" id="title">
+              </div>
+              <div class="form-row mb-3 mt-4">
+                <div class="col">
+                  <label for="specialty">
+                    <h5>specialty</h5>
+                  </label>
+                  <input type="text" class="form-control" id="specialty">
+                </div>
+                <div class="col">
+                  <label for="rol">
+                    <h5>rol</h5>
+                  </label>
+                  <input type="text" class="form-control" id="rol">
+                </div>
+              </div>
+              <div class="form-group mt-4">
+                <label for="content">
+                  <h5>Biography</h5>
+                </label>
+                <textarea class="form-control" id="content" rows="8"></textarea>
+              </div>
+              <h5 class="upload pb-3 mt-5">social</h5>
+              <div class="form-row mb-3">
+                <div class="col first">
+                  <label for="title">
+                    <h5>facebook</h5>
+                  </label>
+                  <input type="text" class="form-control" id="title">
+                </div>
+                <div class="col">
+                  <label for="rol">
+                    <h5>twitter</h5>
+                  </label>
+                  <input type="text" class="form-control" id="rol">
+                </div>
+              </div>
+              <div class="form-row mb-5">
+                <div class="col">
+                  <label for="title">
+                    <h5>instagram</h5>
+                  </label>
+                  <input type="text" class="form-control" id="title">
+                </div>
+                <div class="col">
+                  <label for="rol">
+                    <h5>youtube</h5>
+                  </label>
+                  <input type="text" class="form-control" id="rol">
+                </div>
+              </div>
+              <h5 class="upload pb-3 mt-4">UPLOAD AN IMAGE</h5>
+              <div class="form-group mb-3 row">
+                <div class="col-lg-6 mb-3 input-file">
+                  <label for="image">
+                    <h5>SELECT a new IMAGE</h5>
+                  </label>
+                  <input type="file" class="form-control-file" id="image">
+                </div>
+                <div class="col-lg-6">
+                  <label for="alt">
+                    <h5>ALTERNATIVE TEXT</h5>
+                  </label>
+                  <input type="text" class="form-control" id="alt">
+                </div>
+              </div>
+              <div *ngIf="preview">
+                <label class="text-center">
+                  <h5>IMAGE PREVIEW</h5>
+                </label>
+                <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                  <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer text-center d-block">
+            <button type="button" class="btn primary-btn w-50">
+              POST
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----------------------------------------->
+
+    <!--DELETE COACH MODAL-->
+    <div bsModal #deleteCoachModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="dialog-sizes-name1">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE Coach</h4>
+            <button type="button" class="close pull-right" (click)="deleteCoachModal.hide();" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center p-4">
+            <p>Do you want to confirm?</p>
+            <button type="button" class="btn secondary-btn mr-1"
+              (click)="confirm(); this.deleteRoutineModal.hide()">Yes, delete it</button>
+            <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteCoachModal.hide()">No,
+              thanks</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!------------------------->
+
+    <div class="card">
+      <img class="card-img-top" src="https://picsum.photos/300" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="https://picsum.photos/300" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="https://picsum.photos/300" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="https://picsum.photos/300" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+</div>

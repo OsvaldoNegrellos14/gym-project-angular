@@ -97,7 +97,7 @@
   animation-name: fadeIn;
   -webkit-animation-duration: .4s;
   animation-duration: .4s;
-  background-image: url('/assets/sidenavbg.jpg');
+  background-image: url('/assets/img/sidenavbg.jpg');
   background-size: 20rem 52rem;
   background-repeat: no-repeat;
   filter: contrast(90%);
