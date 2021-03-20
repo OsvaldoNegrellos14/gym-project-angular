@@ -1,6 +1,4 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">REGISTERED USERS</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <button type="button" class="btn btn-sm primary-btn" (click)="addUserModal.show()">
@@ -47,69 +45,45 @@
 
 <!--USER CARDS-->
 <div class="row">
-  <div class="col-md-4 col-sm-6">
+  <div class="col-md-4 col-sm-6 mb-4" *ngFor="let user of users; index as i;">
     <div class="card" style="width: 18rem">
-      <a type="button" class="btn btn-delete text-center" (click)="removeSubscriptionModal.show()" style="top: .5rem !important;">
+      <a type="button" class="btn btn-delete text-center" (click)="removeSubscriptionModal.show()"
+        style="top: .5rem !important;">
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
       <img src="https://picsum.photos/200" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">Morgan Durham</h5>
+        <h5 class="card-title">{{user.name}}</h5>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>Weight:</b> 89 Kg.</li>
-        <li class="list-group-item"><b>Height:</b> 1.75</li>
-        <li class="list-group-item"><b>Age:</b> 27</li>
+        <li class="list-group-item"><b>Weight:</b> {{user.weight}}.</li>
+        <li class="list-group-item"><b>Height:</b> {{user.height}}.</li>
+        <li class="list-group-item"><b>Age:</b> {{user.age}}</li>
       </ul>
+    </div>
+    <!--REMOVE SUBSCRIPTION MODAL-->
+    <div bsModal #removeSubscriptionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="dialog-sizes-name1" id="removeSubscriptionModal_{{i}}">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">REMOVE SUBSCRIPTION</h4>
+            <button type="button" class="close pull-right" (click)="removeSubscriptionModal.hide();" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center p-4">
+            <p>Do you want to confirm?</p>
+            <button type="button" class="btn secondary-btn ml-auto mr-auto d-block mb-3"
+              (click)="confirm(user.uid); this.removeSubscriptionModal.hide()">Yes,
+              remove it</button>
+            <button type="button" class="btn primary-btn ml-auto mr-auto d-block"
+              (click)="decline(); this.removeSubscriptionModal.hide()">No,
+              thanks</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!--REMOVE SUBSCRIPTION MODAL-->
-  <div bsModal #removeSubscriptionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-    aria-labelledby="dialog-sizes-name1">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 id="dialog-sizes-name1" class="modal-title pull-left">REMOVE SUBSCRIPTION</h4>
-          <button type="button" class="close pull-right"
-            (click)="removeSubscriptionModal.hide();" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center p-4">
-          <p>Do you want to confirm?</p>
-          <button type="button" class="btn secondary-btn mr-1" (click)="confirm(); this.removeSubscriptionModal.hide()">Yes,
-            remove it</button>
-          <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.removeSubscriptionModal.hide()">No,
-            thanks</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-6">
-    <div class="card" style="width: 18rem">
-      <img src="https://picsum.photos/200" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Jethro Humphries</h5>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>Peso:</b> 75 Kg.</li>
-        <li class="list-group-item"><b>Estatura:</b> 1.69 mts.</li>
-        <li class="list-group-item"><b>Edad:</b> 27</li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-6 col-sm-12">
-    <div class="card" style="width: 18rem">
-      <img src="https://picsum.photos/200" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Zak Maldonado</h5>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>Peso:</b> 69 Kg.</li>
-        <li class="list-group-item"><b>Estatura:</b> 1.78</li>
-        <li class="list-group-item"><b>Edad:</b> 27</li>
-      </ul>
-    </div>
-  </div>
 </div>

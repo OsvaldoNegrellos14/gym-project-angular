@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -9,9 +10,13 @@ import { AdminService } from '../../../services/admin.service';
 export class UsersComponent implements OnInit {
 
   users:any;
+  newUser = this.form.group({
+
+  });
 
   constructor(
-    private adminService: AdminService
+    private adminService: AdminService,
+    private form: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -22,15 +27,15 @@ export class UsersComponent implements OnInit {
       this.users = gym.subscribers
       console.log(this.users)
     })
-    
+
   }
 
-  confirm() {
-    console.log("Subscription removed");
+  confirm(uid: any) {
+    console.log("Subscription removed! User:",uid);
   }
 
   decline() {
-    console.log("Operation canceled");
+    console.log("Operation canceled!");
   }
 
 }
