@@ -19,33 +19,33 @@
         </button>
       </div>
       <div class="modal-body p-4">
-        <form class="text-center">
+        <form class="text-center" [formGroup]="imgForm">
           <div class="form-group mb-3 row">
             <div class="col-lg-6 mb-3 input-file">
               <label for="image">
                 <h5>SELECT IMAGE</h5>
               </label>
-              <input type="file" class="form-control-file" id="image">
+              <input type="file" class="form-control-file" id="image" formControlName="image" (change)="selectedFile($event)">
             </div>
             <div class="col-lg-6">
               <label for="alt">
                 <h5>ALTERNATIVE TEXT</h5>
               </label>
-              <input type="text" class="form-control" id="alt">
+              <input type="text" class="form-control" id="alt" formControlName="alt">
             </div>
           </div>
-          <div *ngIf="preview">
+          <div *ngIf="existImg">
             <label class="text-center">
               <h5>IMAGE PREVIEW</h5>
             </label>
             <div class="preview ml-auto mr-auto text-center p-3 w-75">
-              <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+              <img class="rounded img-fluid align-self-center" src="{{preview}}">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer text-center d-block">
-        <button type="button" class="btn primary-btn w-50">
+        <button type="button" class="btn primary-btn w-50" (click)="submit();">
           POST
         </button>
       </div>
@@ -106,7 +106,7 @@
             </form>
           </div>
           <div class="modal-footer text-center d-block">
-            <button type="button" class="btn primary-btn w-50">
+            <button type="button" class="btn primary-btn w-50" (click)="updateImage(gallerys.id)">
               SAVE CHANGES
             </button>
           </div>

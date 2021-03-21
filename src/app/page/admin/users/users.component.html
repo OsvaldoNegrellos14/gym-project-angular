@@ -1,13 +1,13 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">REGISTERED USERS</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
-    <button type="button" class="btn btn-sm primary-btn" (click)="addUserModal.show()">
+    <!-- <button type="button" class="btn btn-sm primary-btn" (click)="addUserModal.show()">
       <i class="fa fa-plus"></i>
-    </button>
+    </button> -->
   </div>
 </div>
 
-<!--ADD BLOG MODAL-->
+<!-- ADD BLOG MODAL
 <div bsModal #addUserModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
   aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog modal-lg">
@@ -19,29 +19,29 @@
         </button>
       </div>
       <div class="modal-body p-4">
-        <form class="text-left">
+        <form class="text-left" [formGroup]="user">
           <div class="form-group">
-            <label for="title">
+            <label for="name">
               <h5>NAME</h5>
             </label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="name" formControlName="name">
           </div>
           <div class="form-group">
             <label for="email">
               <h5>EMAIL</h5>
             </label>
-            <input type="text" class="form-control" id="email">
+            <input type="text" class="form-control" id="email" formControlName="email">
           </div>
         </form>
       </div>
       <div class="modal-footer text-center d-block">
-        <button type="button" class="btn primary-btn w-50">
+        <button type="button" class="btn primary-btn w-50" (click)="register();">
           REGISTER
         </button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!--USER CARDS-->
 <div class="row">
@@ -74,8 +74,11 @@
           </div>
           <div class="modal-body text-center p-4">
             <p>Do you want to confirm?</p>
-            <button type="button" class="btn secondary-btn ml-auto mr-auto d-block mb-3"
+            <!-- <button type="button" class="btn secondary-btn ml-auto mr-auto d-block mb-3"
               (click)="confirm(user.uid); this.removeSubscriptionModal.hide()">Yes,
+              remove it</button> -->
+              <button type="button" class="btn secondary-btn ml-auto mr-auto d-block mb-3"
+              (click)="confirm(i); this.removeSubscriptionModal.hide()">Yes,
               remove it</button>
             <button type="button" class="btn primary-btn ml-auto mr-auto d-block"
               (click)="decline(); this.removeSubscriptionModal.hide()">No,

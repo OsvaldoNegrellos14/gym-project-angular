@@ -13,7 +13,7 @@ import { BlogComponent } from './blog/blog.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DashboardComponent, AdminComponent, UsersComponent, GalleryComponent, RoutinesComponent, DietsComponent, BlogComponent, NotificationsComponent, SettingsComponent],
@@ -21,7 +21,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -9,9 +9,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class UsersComponent implements OnInit {
 
-  users:any;
-  newUser = this.form.group({
-
+  users: any;
+  countUsers;
+  user = this.form.group({
+    name: '',
+    email: ''
   });
 
   constructor(
@@ -19,19 +21,25 @@ export class UsersComponent implements OnInit {
     private form: FormBuilder
   ) { }
 
-  ngOnInit() {
-    this.adminService.getGyms()
-    .subscribe((gyms:any) => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      const gym = gyms.find(gym => gym.uid == user.uid)
-      this.users = gym.subscribers
-      console.log(this.users)
-    })
-
+  async ngOnInit() {
+    await this.adminService.getGyms()
+      .subscribe((gyms: any) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const gym = gyms.find(gym => gym.uid == user.uid)
+        // this.users = gym.subscribers;
+        this.users = Object.values(gym.subscribers);
+        this.countUsers = gym.subscribers.length;
+      });
+    // this.adminService.getCountSubscribers();
   }
 
-  confirm(uid: any) {
-    console.log("Subscription removed! User:",uid);
+  // async register() {
+  //   await this.adminService.addUser(this.user.value, this.countUsers);
+  // }
+
+  async confirm(id) {
+    await this.adminService.deleteUser(id);
+    console.log("Subscription removed! User:", id);
   }
 
   decline() {
