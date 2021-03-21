@@ -24,8 +24,8 @@ export class GalleryComponent implements OnInit {
     })
   }
 
-  confirm() {
-    console.log("Image deleted");
+  confirm(id:any) {
+    console.log("Image deleted", id);
   }
 
   decline() {

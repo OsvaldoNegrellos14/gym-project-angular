@@ -1,6 +1,4 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">GALLERY</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <button type="button" class="btn btn-sm primary-btn" (click)="addImageModal.show()">
@@ -56,7 +54,8 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-bottom: 15px;">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-bottom: 15px;"
+    *ngFor="let gallerys of gallery; index as i">
     <div class="card" style="width: 16rem;">
       <a type="button" class="btn btn-edit text-center" (click)="editImageModal.show()">
         <i class="fa fa-pencil-square-o"></i>
@@ -67,14 +66,78 @@
       <img src="https://picsum.photos/200" class="card-img-top" alt="...">
       <div class="card-body">
         <h6 style="text-transform: uppercase;">Alternative text:</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">{{gallerys.alt}}</p>
+      </div>
+    </div>
+    <div bsModal #editImageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="dialog-sizes-name1" id="removeSubscriptionModal_{{i}}">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT IMAGE</h4>
+            <button type="button" class="close pull-right" (click)="editImageModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-4">
+            <form class="text-center">
+              <div class="form-group mb-3 row">
+                <div class="col-lg-6 mb-3 input-file">
+                  <label for="editImage">
+                    <h5>SELECT A NEW IMAGE</h5>
+                  </label>
+                  <input type="file" class="form-control-file" id="editImage">
+                </div>
+                <div class="col-lg-6">
+                  <label for="editAlt">
+                    <h5>ALTERNATIVE TEXT</h5>
+                  </label>
+                  <input type="text" class="form-control text-center" id="editAlt" value="{{gallerys.alt}}">
+                </div>
+              </div>
+              <div *ngIf="preview">
+                <label class="text-center">
+                  <h5>NEW IMAGE PREVIEW</h5>
+                </label>
+                <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                  <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer text-center d-block">
+            <button type="button" class="btn primary-btn w-50">
+              SAVE CHANGES
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div bsModal #deleteImageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="dialog-sizes-name1"  id="removeSubscriptionModal_{{i}}">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE IMAGE</h4>
+            <button type="button" class="close pull-right" (click)="deleteImageModal.hide();" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center p-4">
+            <p>Do you want to confirm?</p>
+            <button type="button" class="btn secondary-btn mr-1" (click)="confirm(gallerys.id); this.deleteImageModal.hide()">Yes,
+              delete it</button>
+            <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteImageModal.hide()">No,
+              thanks</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!--EDIT IMAGE MODAL-->
-  <div bsModal #editImageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-    aria-labelledby="dialog-sizes-name1">
+  <!-- <div bsModal #editImageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-sizes-name1" id="removeSubscriptionModal_{{i}}">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -96,7 +159,7 @@
                 <label for="editAlt">
                   <h5>ALTERNATIVE TEXT</h5>
                 </label>
-                <input type="text" class="form-control text-center" id="editAlt" value="Alternative text">
+                <input type="text" class="form-control text-center" id="editAlt" value="{{}}">
               </div>
             </div>
             <div *ngIf="preview">
@@ -116,17 +179,16 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!--DELETE IMAGE MODAL-->
-  <div bsModal #deleteImageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  <!-- <div bsModal #deleteImageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="dialog-sizes-name1">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE IMAGE</h4>
-          <button type="button" class="close pull-right"
-            (click)="deleteImageModal.hide();" aria-label="Close">
+          <button type="button" class="close pull-right" (click)="deleteImageModal.hide();" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -139,9 +201,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+  <!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
     <div class="card" style="width: 16rem;">
       <img src="https://picsum.photos/200" class="card-img-top" alt="...">
       <div class="card-body">
@@ -204,4 +266,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
