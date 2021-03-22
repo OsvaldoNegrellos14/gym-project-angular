@@ -27,6 +27,12 @@
             <input type="text" class="form-control" id="title">
           </div>
           <div class="form-group">
+            <label for="editTitle">
+              <h5>CALORIES</h5>
+            </label>
+            <input type="text" class="form-control text-center" id="editTitle" value="">
+          </div>
+          <div class="form-group">
             <label for="content">
               <h5>CONTENT</h5>
             </label>
@@ -68,21 +74,20 @@
 
 <!--DIET CARDS-->
 <div class="row">
-  <div class="col-6">
+  <div class="col-6" *ngFor="let diet of diets; index as i">
     <div class="card mb-3" style="max-width: 540px; max-height: auto;">
       <div class="row no-gutters">
         <div class="col-7">
           <div class="card-body">
-            <h5 class="card-title">DIET TITLE</h5>
+            <h5 class="card-title">{{diet.name}}</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
               content. This content is a little bit longer.</p>
             <h6 style="text-transform: uppercase; font-family: 'Oswald', sans-serif;">Info:</h6>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Calories: <span>100</span></li>
-              <li class="list-group-item">Category: <span>Healthy</span></li>
+              <li class="list-group-item">Calories: <span>{{diet.calories}}</span></li>
             </ul>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            <button type="button" class="btn primary-btn ml-auto w-75 d-block text-center">VIEW</button>
+            <button type="button" class="btn primary-btn ml-auto w-75 d-block text-center"
+              style="margin: 20px auto !important;">VIEW</button>
           </div>
         </div>
         <div class="col-5 align-self-center">
@@ -98,10 +103,95 @@
         </div>
       </div>
     </div>
+    <div bsModal #editDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-labelledby="dialog-sizes-name1" id="removeSubscriptionModal_{{i}}">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT DIET</h4>
+            <button type="button" class="close pull-right" (click)="editDietModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-4">
+            <form class="text-center">
+              <div class="form-group">
+                <label for="editTitle">
+                  <h5>TITLE</h5>
+                </label>
+                <input type="text" class="form-control text-center" id="editTitle" value="{{diet.name}}">
+              </div>
+              <div class="form-group">
+                <label for="editTitle">
+                  <h5>CALORIES</h5>
+                </label>
+                <input type="text" class="form-control text-center" id="editTitle" value="{{diet.calories}}">
+              </div>
+              <div class="form-group">
+                <label for="editContent">
+                  <h5>CONTENT</h5>
+                </label>
+                <textarea class="form-control" id="editContent" rows="8">
+                  {{diet.content}}
+                </textarea>
+              </div>
+              <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
+              <div class="form-group mb-3 row">
+                <div class="col-lg-6 mb-3 input-file">
+                  <label for="editImage">
+                    <h5>SELECT A NEW IMAGE</h5>
+                  </label>
+                  <input type="file" class="form-control-file" id="editImage">
+                </div>
+                <div class="col-lg-6">
+                  <label for="editAlt">
+                    <h5>ALTERNATIVE TEXT</h5>
+                  </label>
+                  <input type="text" class="form-control text-center" id="editAlt" value="{{diet.img.alt}}">
+                </div>
+              </div>
+              <div *ngIf="preview">
+                <label class="text-center">
+                  <h5>NEW IMAGE PREVIEW</h5>
+                </label>
+                <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                  <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer text-center d-block">
+            <button type="button" class="btn primary-btn w-50">
+              SAVE CHANGES
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div bsModal #deleteDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE DIET</h4>
+          <button type="button" class="close pull-right" (click)="deleteDietModal.hide();" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center p-4">
+          <p>Do you want to confirm?</p>
+          <button type="button" class="btn secondary-btn mr-1" (click)="confirm(); this.deleteDietModal.hide()">Yes,
+            delete it</button>
+          <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteDietModal.hide()">No,
+            thanks</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!--EDIT DIET MODAL-->
-  <div bsModal #editDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  <!-- <div bsModal #editDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="dialog-sizes-name1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -157,10 +247,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!--DELETE DIET MODAL-->
-  <div bsModal #deleteDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  <!-- <div bsModal #deleteDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="dialog-sizes-name1">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -179,6 +269,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>

@@ -19,7 +19,7 @@ export class DietsComponent implements OnInit {
     .subscribe((gyms:any) => {
       const user = JSON.parse(localStorage.getItem('user'));
       const gym = gyms.find(gym => gym.uid == user.uid)
-      this.diets = gym.routines
+      this.diets = gym.diets
       console.log(this.diets)
     })
   }

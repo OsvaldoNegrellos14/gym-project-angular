@@ -19,7 +19,7 @@ export class BlogComponent implements OnInit {
     .subscribe((gyms:any) => {
       const user = JSON.parse(localStorage.getItem('user'));
       const gym = gyms.find(gym => gym.uid == user.uid)
-      this.news = gym.routines
+      this.news = gym.news
       console.log(this.news)
     })
   }
