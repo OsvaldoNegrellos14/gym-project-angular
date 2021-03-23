@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -14,6 +14,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { SettingsComponent } from './settings/settings.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [DashboardComponent, AdminComponent, UsersComponent, GalleryComponent, RoutinesComponent, DietsComponent, BlogComponent, NotificationsComponent, SettingsComponent],
@@ -23,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     ModalModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AdminModule { }

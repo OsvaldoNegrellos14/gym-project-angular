@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-blog',
@@ -11,13 +12,13 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class BlogComponent implements OnInit {
 
   user = JSON.parse(localStorage.getItem('user'));
+
   currentId;
   file;
   preview;
   currentImg;
   existImg = false;
-  news:any;
-  contentPreview;
+  news: any;
 
   newsForm = this.form.group({
     content: '',
@@ -43,19 +44,23 @@ export class BlogComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private form: FormBuilder,
-    private fStorage: AngularFireStorage
+    private fStorage: AngularFireStorage,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.adminService.getGyms()
-    .subscribe((gyms:any) => {
-      const gym = gyms.find(gym => gym.uid == this.user.uid)
-      this.news = Object.values(gym.news);
-      // console.log(this.news)
-    })
+      .subscribe((gyms: any) => {
+        const gym = gyms.find(gym => gym.uid == this.user.uid)
+        this.news = Object.values(gym.news);
+        // console.log(this.news)
+        this.spinner.hide();
+      })
   }
 
   async submitNews() {
+    this.spinner.show();
     const fileId = new Date().getTime();
     const date = new Date().toLocaleDateString();
 
@@ -72,10 +77,12 @@ export class BlogComponent implements OnInit {
       this.preview = null;
       this.resetForm();
     });
+    this.spinner.hide();
 
   }
 
   async submitEditedNews() {
+    this.spinner.show();
     if (this.file) {
       // console.log('new img', this.file);
       // console.log(this.currentId);
@@ -96,16 +103,17 @@ export class BlogComponent implements OnInit {
     this.existImg = false;
     this.preview = this.currentImg;
     this.file = null;
+    this.spinner.hide();
   }
 
   selectedFile(event: any) {
     const url = new FileReader();
-
+    this.spinner.show();
     url.onload = (event: any) => {
       this.preview = event.target.result;
       this.existImg = true;
+      this.spinner.hide();
     };
-
     url.readAsDataURL(event.target.files[0]);
     this.file = event.target.files[0];
   }
@@ -152,9 +160,11 @@ export class BlogComponent implements OnInit {
       .getDownloadURL();
   }
 
-  confirm(id, img) {
+  async confirm(id, img) {
+    this.spinner.show();
     this.adminService.dropData('/adminGeneral/0/gyms/0/news/' + id);
-    this.adminService.dropImg(img);
+    await this.adminService.dropImg(img);
+    this.spinner.hide();
     // console.log("Blog deleted", id, img);
   }
 

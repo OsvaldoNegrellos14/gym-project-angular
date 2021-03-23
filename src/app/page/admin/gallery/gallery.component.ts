@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-gallery',
@@ -24,20 +25,24 @@ export class GalleryComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private form: FormBuilder,
-    private fStorage: AngularFireStorage
+    private fStorage: AngularFireStorage,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.adminService.getGyms()
       .subscribe((gyms: any) => {
         const gym = gyms.find(gym => gym.uid == this.user.uid)
         this.gallery = Object.values(gym.gallery);
         this.imgCounter = gym.gallery.length;
         // console.log(this.gallery)
+        this.spinner.hide();
       })
   }
 
   async submit() {
+    this.spinner.show();
     const fileId = new Date().getTime();
 
     await this.adminService
@@ -50,15 +55,18 @@ export class GalleryComponent implements OnInit {
       this.resetForm();
       this.existImg = false;
       this.preview = null;
+      this.spinner.hide();
     });
   }
 
   selectedFile(event: any) {
     const url = new FileReader();
+    this.spinner.show();
 
     url.onload = (event: any) => {
       this.preview = event.target.result;
       this.existImg = true;
+      this.spinner.hide();
     };
 
     url.readAsDataURL(event.target.files[0]);
@@ -79,10 +87,12 @@ export class GalleryComponent implements OnInit {
     this.imgForm.reset();
   }
 
-  confirm(img, id: any) {
+  async confirm(img, id: any) {
+    this.spinner.show();
     this.adminService.dropData('/adminGeneral/0/gyms/0/gallery/' + id);
-    this.adminService.dropImg(img);
+    await this.adminService.dropImg(img);
     // console.log("Image deleted", id);
+    this.spinner.hide();
   }
 
   decline() {

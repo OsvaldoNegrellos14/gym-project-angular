@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-diets',
@@ -44,19 +45,23 @@ export class DietsComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private form: FormBuilder,
-    private fStorage: AngularFireStorage
+    private fStorage: AngularFireStorage,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.adminService.getGyms()
     .subscribe((gyms:any) => {
       const gym = gyms.find(gym => gym.uid == this.user.uid)
       this.diets = Object.values(gym.diets);
       // console.log(this.diets)
+      this.spinner.hide();
     })
   }
 
   async submitNewDiet() {
+    this.spinner.show();
     const fileId = new Date().getTime();
 
     await this.adminService.uploadImg(this.file, '/images/gyms/' + this.user.uid + '/diets/' + fileId + '/' + 'IMG_' + fileId);
@@ -71,10 +76,12 @@ export class DietsComponent implements OnInit {
       this.preview = null;
       this.resetForm();
     });
+    this.spinner.hide();
 
   }
 
   async submitEditedDiet() {
+    this.spinner.show();
     if (this.file) {
       // console.log('new img', this.file);
       // console.log(this.currentId);
@@ -95,15 +102,18 @@ export class DietsComponent implements OnInit {
     this.existImg = false;
     this.preview = this.currentImg;
     this.file = null;
+    this.spinner.hide();
 
   }
 
   selectedFile(event: any) {
     const url = new FileReader();
+    this.spinner.show();
 
     url.onload = (event: any) => {
       this.preview = event.target.result;
       this.existImg = true;
+      this.spinner.hide();
     };
 
     url.readAsDataURL(event.target.files[0]);
@@ -155,9 +165,11 @@ export class DietsComponent implements OnInit {
     this.file = null;
   }
 
-  confirm(id, img) {
+  async confirm(id, img) {
+    this.spinner.show();
     this.adminService.dropData('/adminGeneral/0/gyms/0/diets/' + id);
-    this.adminService.dropImg(img);
+    await this.adminService.dropImg(img);
+    this.spinner.hide();
     // console.log("Diet deleted", id, img);
   }
 

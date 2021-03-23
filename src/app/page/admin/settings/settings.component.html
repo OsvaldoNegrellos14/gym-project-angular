@@ -2,6 +2,10 @@
   <h1 class="h2">Configuraciones de la cuenta del GYM</h1>
 </div>
 
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#f34e3a" type="ball-clip-rotate-pulse" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
 <form style="width: 50%; margin-left: auto; margin-right: auto;" [formGroup]="gymForm">
   <div class="form-group row">
     <label for="inputNameGym" class="col-sm-4 col-form-label">Nombre del gimnasio</label>
@@ -167,7 +171,7 @@
                 <h5>SELECT IMAGE</h5>
               </label>
               <button class="btn secondary-btn ml-auto mr-auto d-flex"
-                onclick="document.getElementById('image').click()">Select File</button>
+                onclick="document.getElementById('image').click();">Select File</button>
               <input type="file" class="form-control-file" id="image" style="display: none"
                 (change)="selectedFile($event)">
             </div>

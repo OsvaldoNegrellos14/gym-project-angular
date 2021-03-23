@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-routines',
@@ -45,21 +46,25 @@ export class RoutinesComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private form: FormBuilder,
-    private fStorage: AngularFireStorage
+    private fStorage: AngularFireStorage,
+    private spinner: NgxSpinnerService
   ) {
 
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.adminService.getGyms()
       .subscribe((gyms: any) => {
         const gym = gyms.find(gym => gym.uid == this.user.uid)
         this.routines = Object.values(gym.routines);
         // console.log(this.routines)
+        this.spinner.hide();
       })
   }
 
   async submitNewRoutine() {
+    this.spinner.show();
     const fileId = this.genFileId();
 
     await this.adminService.uploadImg(this.file, '/images/gyms/' + this.user.uid + '/routines/' + fileId + '/' + 'IMG_' + fileId);
@@ -74,9 +79,11 @@ export class RoutinesComponent implements OnInit {
       this.preview = null;
       this.resetForm();
     });
+    this.spinner.hide();
 
   }
   async submitEditedRoutine() {
+    this.spinner.show();
     if (this.file) {
       // console.log('new img', this.file);
       // console.log(this.currentId);
@@ -97,15 +104,18 @@ export class RoutinesComponent implements OnInit {
     this.existImg = false;
     this.preview = this.currentImg;
     this.file = null;
+    this.spinner.hide();
 
   }
 
   selectedFile(event: any) {
     const url = new FileReader();
+    this.spinner.show();
 
     url.onload = (event: any) => {
       this.preview = event.target.result;
       this.existImg = true;
+      this.spinner.hide();
     };
 
     url.readAsDataURL(event.target.files[0]);
@@ -163,14 +173,13 @@ export class RoutinesComponent implements OnInit {
     this.existImg = false;
     this.preview = this.currentImg;
     this.file = null;
-    const filepath: any = document.getElementById('url').onchange = function () {
-      console.log(filepath.value);
-    }
   }
 
-  confirm(id, img) {
+  async confirm(id, img) {
+    this.spinner.show();
     this.adminService.dropData('/adminGeneral/0/gyms/0/routines/' + id);
-    this.adminService.dropImg(img);
+    await this.adminService.dropImg(img);
+    this.spinner.hide();
     // console.log("Routine deleted", id, img);
   }
 

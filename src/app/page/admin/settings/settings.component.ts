@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-settings',
@@ -82,10 +83,12 @@ export class SettingsComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private form: FormBuilder,
-    private fStorage: AngularFireStorage
+    private fStorage: AngularFireStorage,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.adminService.getGyms()
       .subscribe((gyms: any) => {
         this.coaches = Object.values(gyms.find(gym => gym.uid == this.user.uid).coaches);
@@ -107,15 +110,17 @@ export class SettingsComponent implements OnInit {
         // this.gym = Object.values(gyms.find(gym => gym.uid == this.user.uid));
         // console.log(this.gym);
         // console.log(this.coaches);
+        this.spinner.hide();
       });
 
   }
 
-  async submitGymInfo() {
-    await this.adminService.setAdminData(this.gymForm.value, '0');
-  }
+  // async submitGymInfo() {
+  //   await this.adminService.setAdminData(this.gymForm.value, '0');
+  // }
 
   async submitCoach() {
+    this.spinner.show();
     const fileId = new Date().getTime();
 
     await this.adminService.uploadImg(this.file, '/images/gyms/' + this.user.uid + '/coaches/' + fileId + '/' + 'IMG_' + fileId);
@@ -130,10 +135,12 @@ export class SettingsComponent implements OnInit {
       this.preview = null;
       this.resetForm();
     });
+    this.spinner.hide();
 
   }
 
   async submitEditedCoaches() {
+    this.spinner.show();
     if (this.file) {
       // console.log('new img', this.file);
       // console.log(this.currentId);
@@ -154,14 +161,17 @@ export class SettingsComponent implements OnInit {
     this.existImg = false;
     this.preview = this.currentImg;
     this.file = null;
+    this.spinner.hide();
+
   }
 
   selectedFile(event: any) {
     const url = new FileReader();
-
+    this.spinner.show();
     url.onload = (event: any) => {
       this.preview = event.target.result;
       this.existImg = true;
+      this.spinner.hide();
     };
 
     url.readAsDataURL(event.target.files[0]);
@@ -220,10 +230,12 @@ export class SettingsComponent implements OnInit {
       .getDownloadURL();
   }
 
-  confirm(id, img) {
+  async confirm(id, img) {
+    this.spinner.show();
     this.adminService.dropData('/adminGeneral/0/gyms/0/coaches/' + id);
-    this.adminService.dropImg(img);
+    await this.adminService.dropImg(img);
     // console.log("Blog deleted", id, img);
+    this.spinner.hide();
   }
 
   decline() {
