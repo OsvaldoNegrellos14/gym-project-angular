@@ -92,6 +92,9 @@ export class DietsComponent implements OnInit {
       await this.adminService.setDiet(this.editDietForm.value, this.currentId);
       // console.log(this.editDietForm.value.id);
     }
+    this.existImg = false;
+    this.preview = this.currentImg;
+    this.file = null;
 
   }
 

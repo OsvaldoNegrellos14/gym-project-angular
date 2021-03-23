@@ -21,7 +21,7 @@ export class AdminService {
 
   /*General*/
   getGyms() {
-    return this.firebaseApi.list(`/adminGeneral/0/gyms/`).valueChanges()
+    return this.firebaseApi.list(`/adminGeneral/0/gyms/`).valueChanges();
   }
 
   uploadImg(img, route) {
@@ -73,6 +73,15 @@ export class AdminService {
     this.firebaseApi.database.ref('adminGeneral/0/gyms/0/news').child(id).set(news);
   }
   /*==============*/
+
+  /* Settings Component */
+  setAdminData(info, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/').child(id).set(info);
+  }
+  setCoach(coach, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/coaches').child(id).set(coach)
+  }
+  /*===================*/
 
   /* Drop Data */
   dropData(route) {

@@ -18,26 +18,27 @@ export class BlogComponent implements OnInit {
   existImg = false;
   news:any;
   contentPreview;
+
   newsForm = this.form.group({
-    calories: '',
     content: '',
+    date: '',
     img: new FormGroup({
       alt: new FormControl(''),
       id: new FormControl(''),
       url: new FormControl('')
     }),
-    name: ''
+    title: ''
   });
 
   editNewsForm = this.form.group({
-    calories: '',
     content: '',
+    date: '',
     img: new FormGroup({
       alt: new FormControl(''),
       id: new FormControl(''),
       url: new FormControl('')
     }),
-    name: ''
+    title: ''
   });
   constructor(
     private adminService: AdminService,
@@ -56,10 +57,12 @@ export class BlogComponent implements OnInit {
 
   async submitNews() {
     const fileId = new Date().getTime();
+    const date = new Date().toLocaleDateString();
 
     await this.adminService.uploadImg(this.file, '/images/gyms/' + this.user.uid + '/news/' + fileId + '/' + 'IMG_' + fileId);
 
     this.getImgUrl(fileId).then((fileUrl) => {
+      this.newsForm.value.date = date;
       this.newsForm.value.id = fileId;
       this.newsForm.value.img.id = fileId;
       this.newsForm.value.img.url = fileUrl;
@@ -90,6 +93,9 @@ export class BlogComponent implements OnInit {
       await this.adminService.setNews(this.editNewsForm.value, this.currentId);
       // console.log(this.editNewsForm.value.id);
     }
+    this.existImg = false;
+    this.preview = this.currentImg;
+    this.file = null;
   }
 
   selectedFile(event: any) {
@@ -109,14 +115,11 @@ export class BlogComponent implements OnInit {
     this.currentId = this.news[position].id;
     // console.log(this.currentId);
     await this.editNewsForm.patchValue({
-      calories: this.news[position].calories,
-      category: this.news[position].category,
       content: this.news[position].content,
-      duration: this.news[position].duration,
       img: {
         alt: this.news[position].img.alt,
       },
-      name: this.news[position].name
+      title: this.news[position].title
     });
   }
 

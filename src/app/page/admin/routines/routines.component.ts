@@ -94,6 +94,9 @@ export class RoutinesComponent implements OnInit {
       await this.adminService.setRoutine(this.editRoutineForm.value, this.currentId);
       // console.log(this.editRoutineForm.value.id);
     }
+    this.existImg = false;
+    this.preview = this.currentImg;
+    this.file = null;
 
   }
 
