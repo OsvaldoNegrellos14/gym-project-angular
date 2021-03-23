@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+<!-- Site Breadcrumb Begin -->
+<section
+  class="breadcrumb-section set-bg"
+  data-setbg="assets/img/about-breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="site-text">
+          <h2>Diets</h2>
+          <div class="site-breadcrumb">
+            <a [routerLink]="['../home']" class="sb-item">Home</a>
+            <span class="sb-item">Diets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Site Breadcrumb End -->
+
+<!-- Routines Section Begin -->
+
+<div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12" *ngFor="let diet of diets" style="padding-top: 15px; padding-bottom: 15px;">
+        <div
+          class="card"
+          style="
+            background-image: url('{{diet.img.url}}');
+            border: 1px solid #ccc;
+            background-size: cover;
+          "
+        >
+        <!--EDIT AND DELETE BUTTONS-->
+        <a type="button" class="btn btn-edit text-center" (click)="showRoutineModal.show()">
+          <i class="fa fa-eye"></i>
+        </a>
+        <!--------------------------->
+          <div
+            class="background"
+            style="background: rgba(0, 0, 0, 0.5); color: white !important"
+          >
+            <div class="card-content">
+              <div class="card-body pb-5">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-pencil primary font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-left">
+                    <h3 class="text-white">{{diet.name}}</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" style="border-top: 1px solid #ccc">
+                <div class="media d-flex">
+                  <div class="media-body text-right">
+                    <h3 class="text-white">{{diet.calories}}</h3>
+                    <span>Calories</span>
+                  </div>
+                  <div class="align-self-center">
+                    <i class="icon-rocket danger font-large-2 float-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!--EDIT ROUTINE MODAL-->
+        <div bsModal #showRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+          aria-labelledby="dialog-sizes-name1">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">name</h4>
+                <button type="button" class="close pull-right" (click)="showRoutineModal.hide()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body p-4">
+                <form class="text-center">
+                  <div class="form-group">
+                    <label for="editTitle">
+                      <h5>CATEGORY</h5>
+                    </label>
+                    <input type="text" class="form-control text-center" id="editTitle" value="category">
+                  </div>
+                  <div class="form-group">
+                    <label for="editContent">
+                      <h5>DESCRIPTION</h5>
+                    </label>
+                    <textarea class="form-control" id="editContent" rows="10">content</textarea>
+                  </div>
+                  <div class="modal-footer text-center d-block">
+                    <button type="button" class="btn primary-btn w-50">
+                      Assign routine
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <!-- Routines Section End -->

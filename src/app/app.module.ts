@@ -20,6 +20,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AccountComponent } from './page/account/account.component';
+import { DietsComponent } from './page/diets/diets.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     BlogDetailsComponent,
     ContactComponent,
     SignInComponent,
+    AccountComponent,
+    DietsComponent,
   ],
   imports: [
     BrowserModule,

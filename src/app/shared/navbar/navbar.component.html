@@ -12,7 +12,8 @@
           <ul>
             <li [ngClass]="{'active': path == '/home'}"><a [routerLink]="['/home']">Home</a></li>
             <li><a [routerLink]="['/aboutus']">About</a></li>
-            <li><a [routerLink]="['/schedule']">Schedule</a></li>
+            <li><a [routerLink]="['/schedule']">Routines</a></li>
+            <li><a [routerLink]="['/diets']">Diets</a></li>
             <li><a [routerLink]="['/portfolio']">Portfolio</a></li>
             <li><a [routerLink]="['/blog']">Blog</a>
               <ul class="dropdown">
@@ -29,8 +30,8 @@
             </ng-template>
           </ul>
         </nav>
-        <div class="nav-right search-switch">
-          <i class="fa fa-search" aria-hidden="true"></i>
+        <div class="nav-right search-switch" *ngIf="user !== null">
+          <a [routerLink]="['/account']"><i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 19px;"></i></a>
         </div>
       </div>
       <div id="mobile-menu-wrap">
@@ -43,7 +44,8 @@
             <ul>
               <li class="active"><a [routerLink]="['/home']" role="menuitem">Home</a></li>
               <li><a [routerLink]="['/aboutus']" role="menuitem">About</a></li>
-              <li><a [routerLink]="['/schedule']" role="menuitem">Schedule</a></li>
+              <li><a [routerLink]="['/schedule']" role="menuitem">Routines</a></li>
+              <li><a [routerLink]="['/diets']" role="menuitem">Diets</a></li>
               <li><a [routerLink]="['/portfolio']" role="menuitem">Portfolio</a></li>
               <div class=" card-header" (click)="isCollapsedSub = !isCollapsedSub"
                 [attr.aria-expanded]="!isCollapsedSub" aria-controls="collapseBasic" style="border: 0px">
@@ -83,7 +85,8 @@
           <ul>
             <li><a [routerLink]="['/home']">Home</a></li>
             <li [ngClass]="{'active': path == '/aboutus'}"><a [routerLink]="['/aboutus']">About</a></li>
-            <li [ngClass]="{'active': path == '/schedule'}"><a [routerLink]="['/schedule']">Schedule</a></li>
+            <li [ngClass]="{'active': path == '/schedule'}"><a [routerLink]="['/schedule']">Routines</a></li>
+            <li [ngClass]="{'active': path == '/diets'}"><a [routerLink]="['/diets']">Diets</a></li>
             <li [ngClass]="{'active': path == '/portfolio'}"><a [routerLink]="['/portfolio']">Portfolio</a></li>
             <li [ngClass]="{'active': path == '/blog'}"><a [routerLink]="['/blog']">Blog</a>
               <ul class="dropdown">
@@ -100,8 +103,8 @@
             </ng-template>
           </ul>
         </nav>
-        <div class="nav-right search-switch">
-          <i class="fa fa-search"></i>
+        <div class="nav-right search-switch" *ngIf="user !== null">
+          <a [routerLink]="['/account']"><i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 19px;"></i></a>
         </div>
       </div>
       <div id="mobile-menu-wrap1">
@@ -114,7 +117,8 @@
             <ul>
               <li class="active"><a [routerLink]="['/home']" role="menuitem">Home</a></li>
               <li><a [routerLink]="['/aboutus']" role="menuitem">About</a></li>
-              <li><a [routerLink]="['/schedule']" role="menuitem">Schedule</a></li>
+              <li><a [routerLink]="['/schedule']" role="menuitem">Routines</a></li>
+              <li><a [routerLink]="['/diets']" role="menuitem">Diets</a></li>
               <li><a [routerLink]="['/portfolio']" role="menuitem">Portfolio</a></li>
               <div class=" card-header" (click)="isCollapsedSub = !isCollapsedSub"
                 [attr.aria-expanded]="!isCollapsedSub" aria-controls="collapseBasic" style="border: 0px">

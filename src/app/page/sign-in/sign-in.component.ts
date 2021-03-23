@@ -52,7 +52,7 @@ export class SignInComponent implements OnInit {
       await this.firebaseService.signIn(this.user.value.email, this.user.value.password);
       if (this.firebaseService.isLoggin) {
         this.isSignedIn = true;
-        this.route.navigateByUrl('admin');
+        this.route.navigateByUrl('home');
       }
     }
   }
@@ -63,7 +63,7 @@ export class SignInComponent implements OnInit {
   }
 
   confirm() {
-    this.route.navigateByUrl('admin');
+    this.route.navigateByUrl('home');
     this.modalRef.hide();
   }
 

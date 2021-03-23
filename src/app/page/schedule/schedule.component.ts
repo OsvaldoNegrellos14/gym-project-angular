@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-schedule',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleComponent implements OnInit {
 
-  constructor() { }
+  routines:any;
+
+  constructor(
+    private publicService: PublicService
+  ) { }
 
   ngOnInit() {
+    this.publicService.getRoutines()
+    .subscribe((routines:any) => {
+      this.routines = routines
+      console.log(this.routines)
+    })
   }
 
 }

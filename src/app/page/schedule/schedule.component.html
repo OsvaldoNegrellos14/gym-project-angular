@@ -1,269 +1,160 @@
 <app-navbar></app-navbar>
 <!-- Site Breadcrumb Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="img/about-breadcrumb-bg.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="site-text">
-                    <h2>Schedule</h2>
-                    <div class="site-breadcrumb">
-                        <a href="./home.html" class="sb-item">Home</a>
-                        <span class="sb-item">Schedule</span>
-                    </div>
-                </div>
-            </div>
+<section
+  class="breadcrumb-section set-bg"
+  data-setbg="img/about-breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="site-text">
+          <h2>Routines</h2>
+          <div class="site-breadcrumb">
+            <a href="./home.html" class="sb-item">Home</a>
+            <span class="sb-item">Routines</span>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- Site Breadcrumb End -->
 
-<!-- Trainer Table Schedule Section Begin -->
-<section class="trainer-schedule class-timetable spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Class Timetable</h2>
-                    <div class="nav-controls">
-                        <ul class="schedule-filter">
-                            <li class="active" data-tsfilter="all">All Class</li>
-                            <li data-tsfilter="gym">Gym</li>
-                            <li data-tsfilter="crossfit">Crossfit</li>
-                            <li data-tsfilter="cardio">Cardio</li>
-                            <li data-tsfilter="body">Body</li>
-                            <li data-tsfilter="yoga">Yoga</li>
-                        </ul>
-                    </div>
+<!-- Routines Section Begin -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-3 col-sm-6 col-12" *ngFor="let routine of routines" style="padding-top: 15px; padding-bottom: 15px;">
+      <div
+        class="card"
+        style="
+          background-image: url('{{routine.img.url}}');
+          border: 1px solid #ccc;
+          background-size: cover;
+        "
+      >
+      <!--EDIT AND DELETE BUTTONS-->
+      <a type="button" class="btn btn-edit text-center" (click)="showRoutineModal.show()">
+        <i class="fa fa-eye"></i>
+      </a>
+      <!--------------------------->
+        <div
+          class="background"
+          style="background: rgba(0, 0, 0, 0.5); color: white !important"
+        >
+          <div class="card-content">
+            <div class="card-body pb-5">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <i class="icon-pencil primary font-large-2 float-left"></i>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="schedule-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                                <th>Sunday</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="workout-time">10.00</td>
-                                <td class="gym ts-item" data-tsmeta="gym">
-                                    <h6>Gym</h6>
-                                    <span>10.00 - 11.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="yoga ts-item" data-tsmeta="yoga">
-                                    <h6>Yoga</h6>
-                                    <span>10.00 - 12.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="body ts-item" data-tsmeta="body">
-                                    <h6>Body</h6>
-                                    <span>10.00 - 12.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="cardio ts-item" data-tsmeta="cardio">
-                                    <h6>Cardio</h6>
-                                    <span>10.00 - 11.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="workout-time">14.00</td>
-                                <td></td>
-                                <td class="running ts-item" data-tsmeta="running">
-                                    <h6>Running</h6>
-                                    <span>14.00 - 16.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="box ts-item" data-tsmeta="box">
-                                    <h6>Box</h6>
-                                    <span>14.00 - 15.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="gym ts-item" data-tsmeta="gym">
-                                    <h6>Gym</h6>
-                                    <span>14.00 - 16.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="workout-time">16.00</td>
-                                <td class="cardio ts-item" data-tsmeta="cardio">
-                                    <h6>Cardio</h6>
-                                    <span>16.00 - 18.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="gym ts-item" data-tsmeta="gym">
-                                    <h6>Gym</h6>
-                                    <span>16.00 - 19.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="yoga ts-item" data-tsmeta="yoga">
-                                    <h6>Yoga</h6>
-                                    <span>16.00 - 18.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="gym ts-item" data-tsmeta="gym">
-                                    <h6>Gym</h6>
-                                    <span>16.00 - 20.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="workout-time">18.00</td>
-                                <td class="box ts-item" data-tsmeta="box">
-                                    <h6>Box</h6>
-                                    <span>18.00 - 22.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td class="body ts-item" data-tsmeta="body">
-                                    <h6>Body</h6>
-                                    <span>18.00 - 20.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="crossfit ts-item" data-tsmeta="crossfit">
-                                    <h6>Crossfit</h6>
-                                    <span>18.00 - 21.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="cardio ts-item" data-tsmeta="cardio">
-                                    <h6>Cardio</h6>
-                                    <span>18.00 - 22.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="workout-time">20.00</td>
-                                <td></td>
-                                <td class="gym ts-item" data-tsmeta="">
-                                    <h6>Gym</h6>
-                                    <span>20.00 - 12.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td class="body ts-item" data-tsmeta="">
-                                    <h6>Body</h6>
-                                    <span>20.00 - 21.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="cardio ts-item" data-tsmeta="">
-                                    <h6>Cardio</h6>
-                                    <span>20.00 - 22.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td class="crossfit ts-item" data-tsmeta="">
-                                    <h6>Crossfit</h6>
-                                    <span>20.00 - 21.00</span>
-                                    <div class="trainer-name">
-                                        John Smith
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="media-body text-left">
+                  <h3 class="text-white">{{routine.name}}</h3>
                 </div>
+              </div>
             </div>
+            <div class="card-body" style="border-top: 1px solid #ccc">
+              <div class="media d-flex">
+                <div class="media-body text-right">
+                  <h3 class="text-white">{{routine.category}}</h3>
+                  <span>Category</span>
+                </div>
+                <div class="align-self-center">
+                  <i class="icon-rocket danger font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!--EDIT ROUTINE MODAL-->
+      <div bsModal #showRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="dialog-sizes-name1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{routine.name}}</h4>
+              <button type="button" class="close pull-right" (click)="showRoutineModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-4">
+              <form class="text-center">
+                <div class="form-group">
+                  <label for="editTitle">
+                    <h5>CATEGORY</h5>
+                  </label>
+                  <input type="text" class="form-control text-center" id="editTitle" value="{{routine.category}}">
+                </div>
+                <div class="form-group">
+                  <label for="editContent">
+                    <h5>DESCRIPTION</h5>
+                  </label>
+                  <textarea class="form-control" id="editContent" rows="10">{{routine.content}}</textarea>
+                </div>
+                <div class="modal-footer text-center d-block">
+                  <button type="button" class="btn primary-btn w-50">
+                    Assign routine
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-</section>
-<!-- Trainer Table Schedule Section End -->
+  </div>
+</div>
+
+<!-- Routines Section End -->
+
+
 
 <!-- Footer Section Begin -->
 <footer class="footer-section">
-    <div class="register normal-register">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="copyright">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                    <div class="footer-widget">
-                        <ul>
-                            <li class="active">Privacy Policy</li>
-                            <li>Terms Of Service</li>
-                            <li>Careers</li>
-                        </ul>
-                    </div>
-                    <div class="footer-links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
+  <div class="register normal-register">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="copyright">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved | This template is made with
+            <i class="fa fa-heart-o" aria-hidden="true"></i> by
+            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </div>
+          <div class="footer-widget">
+            <ul>
+              <li class="active">Privacy Policy</li>
+              <li>Terms Of Service</li>
+              <li>Careers</li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </footer>
 <!-- Footer Section End -->
 
 <!-- Search model Begin -->
 <div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
-        </form>
-    </div>
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="search-close-switch">+</div>
+    <form class="search-model-form">
+      <input type="text" id="search-input" placeholder="Search here....." />
+    </form>
+  </div>
 </div>
 <!-- Search model end -->

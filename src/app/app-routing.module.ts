@@ -8,6 +8,8 @@ import {BlogComponent} from './page/blog/blog.component';
 import {ContactComponent} from './page/contact/contact.component';
 import {BlogDetailsComponent} from './page/blog-details/blog-details.component';
 import { SignInComponent } from './page/sign-in/sign-in.component';
+import { AccountComponent } from './page/account/account.component';
+import { DietsComponent } from './page/diets/diets.component';
 
 
 const routes: Routes = [
@@ -16,10 +18,12 @@ const routes: Routes = [
   { path: 'home', component: IndexComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'schedule', component: ScheduleComponent },
+  { path: 'diets', component: DietsComponent },
   { path: 'portfolio', component: GalleryComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog-details', component: BlogDetailsComponent },
+  { path: 'account', component: AccountComponent },
   { path: '', loadChildren: () => import('./page/admin/admin.module').then( m => m.AdminModule ) }
 ];
 

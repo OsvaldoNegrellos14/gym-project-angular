@@ -1,0 +1,109 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <form style="width: 50%; margin-left: auto; margin-right: auto">
+    <div style="text-align: center">
+      <img
+        src="/assets/img/trainer/trainer-3.jpg"
+        alt=""
+        style="border-radius: 50%; height: 100px; width: 100px"
+      />
+    </div>
+    <hr />
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label">Nombre</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          id="inputName"
+          placeholder="Nombre del gym"
+          value="{{ user.name }}"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          placeholder="Email"
+          disabled
+          value="{{ user.email }}"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputUserHeight" class="col-sm-3 col-form-label"
+        >Height</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="number"
+          class="form-control"
+          id="inputUserHeight"
+          placeholder="centimeters"
+          value="{{ user.height }}"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputUserWeight" class="col-sm-3 col-form-label"
+        >Weight</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="number"
+          class="form-control"
+          id="inputUserHeight"
+          placeholder="centimeters"
+          value="{{ user.weight }}"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <button type="submit" class="btn primary-btn ml-auto mr-auto d-block">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <h3>My routines</h3>
+  <hr />
+
+  <div *ngIf="user.routines != null; else elseBlock">
+      si hay rutinas
+    </div>
+  <ng-template #elseBlock>
+      <div style="text-align: center;">
+        <b style="font-size: 20px;">
+            You don't have registered routines
+        </b>
+        <br>
+        <a class="btn primary-btn" [routerLink]="['/diets']">register now</a>
+      </div>
+  </ng-template>
+
+  <br />
+  <br />
+  <h3>My diets</h3>
+  <hr />
+
+  <div *ngIf="user.diets != null; else elseBlock2">
+      si hay rutinas
+  </div>
+  <ng-template #elseBlock2>
+    <div style="text-align: center;">
+        <b style="font-size: 20px;">
+            You don't have registered diets
+        </b>
+        <br>
+        <a class="btn primary-btn" [routerLink]="['/schedule']">register now</a>
+      </div>
+  </ng-template>
+  <br />
+  <br />
+</div>
