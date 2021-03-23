@@ -10,13 +10,14 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class GalleryComponent implements OnInit {
 
+  user = JSON.parse(localStorage.getItem('user'));
   existImg = false;
   preview;
   file;
   imgCounter;
   imgForm = this.form.group({
     id: '',
-    image: '',
+    img: '',
     alt: ''
   })
   gallery: any;
@@ -29,28 +30,27 @@ export class GalleryComponent implements OnInit {
   ngOnInit() {
     this.adminService.getGyms()
       .subscribe((gyms: any) => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const gym = gyms.find(gym => gym.uid == user.uid)
-        this.gallery = gym.galery;
-        this.imgCounter = gym.galery.length;
-        console.log(this.imgCounter)
+        const gym = gyms.find(gym => gym.uid == this.user.uid)
+        this.gallery = Object.values(gym.gallery);
+        this.imgCounter = gym.gallery.length;
+        // console.log(this.gallery)
       })
   }
 
   async submit() {
     const fileId = new Date().getTime();
-    const user = JSON.parse(localStorage.getItem('user'));
 
     await this.adminService
-    .uploadGymImg(this.file, '/images/gyms/' + user.uid + '/' + this.imgCounter + '/' + fileId);
+      .uploadImg(this.file, '/images/gyms/' + this.user.uid + '/gallery/' + fileId + '/' + 'IMG_' + fileId);
 
     this.getImgUrl(fileId).then((fileUrl) => {
-      this.imgForm.value.id = this.imgCounter;
-      this.imgForm.value.image = fileUrl;
-      console.log(this.imgForm.value);
-      this.adminService.addToGallery(this.imgForm.value, this.imgCounter);
+      this.imgForm.value.id = fileId;
+      this.imgForm.value.img = fileUrl;
+      this.adminService.addToGallery(this.imgForm.value, fileId);
+      this.resetForm();
+      this.existImg = false;
+      this.preview = null;
     });
-
   }
 
   selectedFile(event: any) {
@@ -66,20 +66,23 @@ export class GalleryComponent implements OnInit {
   }
 
   async getImgUrl(fileId: any) {
-    const user = JSON.parse(localStorage.getItem('user'));
-
     return await this.fStorage.storage
-    .refFromURL('gs://gym-utt.appspot.com/images/gyms/' + user.uid + '/' + this.imgCounter + '/' + fileId)
-    .getDownloadURL();
+      .refFromURL('gs://gym-utt.appspot.com/images/gyms/' + this.user.uid + '/gallery/' + fileId + '/' + 'IMG_' + fileId)
+      .getDownloadURL();
   }
 
-  updateImage(id) {
-    console.log("Image updated", id);
+  // updateImage(id) {
+  //   console.log("Image updated", id);
+  // }
+
+  resetForm() {
+    this.imgForm.reset();
   }
 
-  confirm(id: any) {
-    this.adminService
-    console.log("Image deleted", id);
+  confirm(img, id: any) {
+    this.adminService.dropData('/adminGeneral/0/gyms/0/gallery/' + id);
+    this.adminService.dropImg(img);
+    // console.log("Image deleted", id);
   }
 
   decline() {

@@ -14,7 +14,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-sizes-name1" class="modal-title pull-left">ADD A NEW BLOG</h4>
-        <button type="button" class="close pull-right" (click)="addBlogModal.hide()" aria-label="Close">
+        <button type="button" class="close pull-right" (click)="addBlogModal.hide(); resetForm();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -23,12 +23,6 @@
           <div class="form-group">
             <label for="title">
               <h5>TITLE</h5>
-            </label>
-            <input type="text" class="form-control" id="title">
-          </div>
-          <div class="form-group">
-            <label for="title">
-              <h5>DATE</h5>
             </label>
             <input type="text" class="form-control" id="title">
           </div>
@@ -114,12 +108,6 @@
                 <h5>TITLE</h5>
               </label>
               <input type="text" class="form-control text-center" id="editTitle" value="{{new.title}}">
-            </div>
-            <div class="form-group">
-              <label for="editTitle">
-                <h5>DATE</h5>
-              </label>
-              <input type="text" class="form-control text-center" id="editTitle" value="{{new.date}}">
             </div>
             <div class="form-group">
               <label for="editContent">

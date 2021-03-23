@@ -14,7 +14,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-sizes-name1" class="modal-title pull-left">ADD A NEW IMAGE</h4>
-        <button type="button" class="close pull-right" (click)="addImageModal.hide()" aria-label="Close">
+        <button type="button" class="close pull-right" (click)="addImageModal.hide(); resetForm();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -25,7 +25,8 @@
               <label for="image">
                 <h5>SELECT IMAGE</h5>
               </label>
-              <input type="file" class="form-control-file" id="image" formControlName="image" (change)="selectedFile($event)">
+              <button class="btn secondary-btn ml-auto mr-auto d-flex" onclick="document.getElementById('img').click()">Select File</button>
+              <input type="file" class="form-control-file" id="img" style="display: none" (change)="selectedFile($event)">
             </div>
             <div class="col-lg-6">
               <label for="alt">
@@ -45,7 +46,7 @@
         </form>
       </div>
       <div class="modal-footer text-center d-block">
-        <button type="button" class="btn primary-btn w-50" (click)="submit();">
+        <button type="button" class="btn primary-btn w-50" (click)="submit(); addImageModal.hide()">
           POST
         </button>
       </div>
@@ -57,13 +58,10 @@
   <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-bottom: 15px;"
     *ngFor="let gallerys of gallery; index as i">
     <div class="card" style="width: 16rem;">
-      <a type="button" class="btn btn-edit text-center" (click)="editImageModal.show()">
-        <i class="fa fa-pencil-square-o"></i>
-      </a>
-      <a type="button" class="btn btn-delete text-center" (click)="deleteImageModal.show()">
+      <a type="button" class="btn btn-delete text-center" style="top: 0.5rem !important;" (click)="deleteImageModal.show()">
         <i class="fa fa-trash" aria-hidden="true"></i>
       </a>
-      <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+      <img src="{{gallerys.img}}" class="card-img-top" alt="...">
       <div class="card-body">
         <h6 style="text-transform: uppercase;">Alternative text:</h6>
         <p class="card-text">{{gallerys.alt}}</p>
@@ -125,7 +123,7 @@
           </div>
           <div class="modal-body text-center p-4">
             <p>Do you want to confirm?</p>
-            <button type="button" class="btn secondary-btn mr-1" (click)="confirm(gallerys.id); this.deleteImageModal.hide()">Yes,
+            <button type="button" class="btn secondary-btn mr-1" (click)="confirm(gallerys.img, gallerys.id); this.deleteImageModal.hide()">Yes,
               delete it</button>
             <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteImageModal.hide()">No,
               thanks</button>

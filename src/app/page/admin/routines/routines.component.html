@@ -14,51 +14,75 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-sizes-name1" class="modal-title pull-left">ADD A NEW ROUTINE</h4>
-        <button type="button" class="close pull-right" (click)="addRoutineModal.hide()" aria-label="Close">
+        <button type="button" class="close pull-right" (click)="addRoutineModal.hide(); resetForm();"
+          aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body p-4">
-        <form class="text-center">
+        <form class="text-center" [formGroup]="routineForm">
           <div class="form-group">
-            <label for="title">
-              <h5>TITLE</h5>
+            <label for="name">
+              <h5>Name</h5>
             </label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+          <div class="form-group mb-3 row">
+            <div class="col-lg-6 mb-3">
+              <label for="calories">
+                <h5>CALORIES</h5>
+              </label>
+              <input type="number" class="form-control text-center" id="calories" formControlName="calories">
+            </div>
+            <div class="col-lg-6">
+              <label for="duration">
+                <h5>DURATION</h5>
+              </label>
+              <input type="number" class="form-control text-center" id="duration" formControlName="duration">
+            </div>
+          </div>
+          <div class="form-group w-75 ml-auto mr-auto">
+            <label for="category">
+              <h5>CATEGORY</h5>
+            </label>
+            <input type="text" class="form-control" id="category" formControlName="category">
           </div>
           <div class="form-group">
             <label for="content">
               <h5>CONTENT</h5>
             </label>
-            <textarea class="form-control" id="content" rows="8"></textarea>
+            <textarea class="form-control" id="content" rows="8" formControlName="content"></textarea>
           </div>
           <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
-          <div class="form-group mb-3 row">
+          <div class="form-group mb-3 row" formGroupName="img">
             <div class="col-lg-6 mb-3 input-file">
-              <label for="image">
+              <label for="url">
                 <h5>SELECT IMAGE</h5>
               </label>
-              <input type="file" class="form-control-file" id="image">
+              <button class="btn secondary-btn ml-auto mr-auto d-flex"
+                onclick="document.getElementById('url').click()">Select File</button>
+              <input type="file" class="form-control-file" id="url" style="display: none"
+                (change)="selectedFile($event)">
             </div>
             <div class="col-lg-6">
               <label for="alt">
                 <h5>ALTERNATIVE TEXT</h5>
               </label>
-              <input type="text" class="form-control" id="alt">
+              <input type="text" class="form-control" id="alt" formControlName="alt">
             </div>
           </div>
-          <div *ngIf="preview">
+          <div *ngIf="existImg">
             <label class="text-center">
               <h5>IMAGE PREVIEW</h5>
             </label>
             <div class="preview ml-auto mr-auto text-center p-3 w-75">
-              <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+              <img class="rounded img-fluid align-self-center" src="{{preview}}">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer text-center d-block">
-        <button type="button" class="btn primary-btn w-50">
+        <button type="button" class="btn primary-btn w-50" (click)="submitNewRoutine(); addRoutineModal.hide();">
           POST
         </button>
       </div>
@@ -75,11 +99,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xl-3 col-sm-6 col-12">
+      <div class="col-xl-3 col-sm-6 col-12 mb-4" *ngFor="let routine of routines; index as i;">
         <div class="card"
-          style="background-image: url('https://picsum.photos/500'); border: 1px solid #ccc; background-size: cover;">
+          style="background-image: url({{routine.img.url}}); border: 1px solid #ccc; background-size: cover;">
           <!--EDIT AND DELETE BUTTONS-->
-          <a type="button" class="btn btn-edit text-center" (click)="editRoutineModal.show()">
+          <a type="button" class="btn btn-edit text-center" (click)="editRoutineModal.show(); patchForm(i);">
             <i class="fa fa-pencil-square-o"></i>
           </a>
           <a type="button" class="btn btn-delete text-center" (click)="deleteRoutineModal.show()">
@@ -112,90 +136,120 @@
               </div>
             </div>
           </div>
+          <!--EDIT ROUTINE MODAL-->
+          <div bsModal #editRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+            aria-labelledby="dialog-sizes-name1" id="editRoutineModal_{{i}}">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT ROUTINE</h4>
+                  <button type="button" class="close pull-right" (click)="editRoutineModal.hide(); resetForm();"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body p-4">
+                  <form class="text-center" [formGroup]="editRoutineForm">
+                    <div class="form-group">
+                      <label for="editTitle">
+                        <h5>TITLE</h5>
+                      </label>
+                      <input type="text" class="form-control text-center" id="editName" formControlName="name">
+                    </div>
+                    <div class="form-group mb-3 row">
+                      <div class="col-lg-6 mb-3">
+                        <label for="calories">
+                          <h5>CALORIES</h5>
+                        </label>
+                        <input type="number" class="form-control text-center" id="calories" formControlName="calories">
+                      </div>
+                      <div class="col-lg-6">
+                        <label for="duration">
+                          <h5>DURATION</h5>
+                        </label>
+                        <input type="number" class="form-control text-center" id="duration" formControlName="duration">
+                      </div>
+                    </div>
+                    <div class="form-group w-75 ml-auto mr-auto">
+                      <label for="category">
+                        <h5>CATEGORY</h5>
+                      </label>
+                      <input type="text" class="form-control" id="category" formControlName="category">
+                    </div>
+                    <div class="form-group">
+                      <label for="editContent">
+                        <h5>CONTENT</h5>
+                      </label>
+                      <textarea class="form-control" id="editContent" rows="8" formControlName="content"></textarea>
+                    </div>
+                    <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
+                    <div class="form-group mb-3 row" formGroupName="img">
+                      <div class="col-lg-6 mb-3 input-file">
+                        <label for="url">
+                          <h5>SELECT A NEW IMAGE</h5>
+                        </label>
+                        <button class="btn secondary-btn ml-auto mr-auto d-flex"
+                          onclick="document.getElementById('url').click()">Select File</button>
+                        <input type="file" class="form-control-file" id="url" style="display: none"
+                          (change)="selectedFile($event)">
+                      </div>
+                      <div class="col-lg-6">
+                        <label for="editAlt">
+                          <h5>ALTERNATIVE TEXT</h5>
+                        </label>
+                        <input type="text" class="form-control text-center" id="editAlt" formControlName="alt">
+                      </div>
+                    </div>
+                    <div *ngIf="existImg; else currentImage;">
+                      <label class="text-center">
+                        <h5>NEW IMAGE PREVIEW</h5>
+                      </label>
+                      <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                        <img class="rounded img-fluid align-self-center" src="{{preview}}">
+                      </div>
+                    </div>
+                    <ng-template #currentImage>
+                      <label class="text-center">
+                        <h5>CURRENT IMAGE PREVIEW</h5>
+                      </label>
+                      <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                        <img class="rounded img-fluid align-self-center" src="{{currentImg}}">
+                      </div>
+                    </ng-template>
+                  </form>
+                </div>
+                <div class="modal-footer text-center d-block">
+                  <button type="button" class="btn primary-btn w-50" (click)="submitEditedRoutine()">
+                    SAVE CHANGES
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <!--EDIT ROUTINE MODAL-->
-      <div bsModal #editRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="dialog-sizes-name1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT ROUTINE</h4>
-              <button type="button" class="close pull-right" (click)="editRoutineModal.hide()" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body p-4">
-              <form class="text-center">
-                <div class="form-group">
-                  <label for="editTitle">
-                    <h5>TITLE</h5>
-                  </label>
-                  <input type="text" class="form-control text-center" id="editTitle" value="News title">
-                </div>
-                <div class="form-group">
-                  <label for="editContent">
-                    <h5>CONTENT</h5>
-                  </label>
-                  <textarea class="form-control" id="editContent" rows="8"></textarea>
-                </div>
-                <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
-                <div class="form-group mb-3 row">
-                  <div class="col-lg-6 mb-3 input-file">
-                    <label for="editImage">
-                      <h5>SELECT A NEW IMAGE</h5>
-                    </label>
-                    <input type="file" class="form-control-file" id="editImage">
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="editAlt">
-                      <h5>ALTERNATIVE TEXT</h5>
-                    </label>
-                    <input type="text" class="form-control text-center" id="editAlt" value="Alternative text">
-                  </div>
-                </div>
-                <div *ngIf="preview">
-                  <label class="text-center">
-                    <h5>NEW IMAGE PREVIEW</h5>
-                  </label>
-                  <div class="preview ml-auto mr-auto text-center p-3 w-75">
-                    <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer text-center d-block">
-              <button type="button" class="btn primary-btn w-50">
-                SAVE CHANGES
-              </button>
+        <!--DELETE ROUTINE MODAL-->
+        <div bsModal #deleteRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+          aria-labelledby="dialog-sizes-name1">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE ROUTINE</h4>
+                <button type="button" class="close pull-right" (click)="deleteRoutineModal.hide();" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body text-center p-4">
+                <p>Do you want to confirm?</p>
+                <button type="button" class="btn secondary-btn mr-1"
+                  (click)="confirm(routine.id, routine.img.url); this.deleteRoutineModal.hide()">Yes, delete it</button>
+                <button type="button" class="btn primary-btn ml-1"
+                  (click)="decline(); this.deleteRoutineModal.hide()">No,
+                  thanks</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!--DELETE ROUTINE MODAL-->
-      <div bsModal #deleteRoutineModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="dialog-sizes-name1">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 id="dialog-sizes-name1" class="modal-title pull-left">DELETE ROUTINE</h4>
-              <button type="button" class="close pull-right"
-                (click)="deleteRoutineModal.hide();" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body text-center p-4">
-              <p>Do you want to confirm?</p>
-              <button type="button" class="btn secondary-btn mr-1" (click)="confirm(); this.deleteRoutineModal.hide()">Yes, delete it</button>
-              <button type="button" class="btn primary-btn ml-1"
-                (click)="decline(); this.deleteRoutineModal.hide()">No, thanks</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 </div>

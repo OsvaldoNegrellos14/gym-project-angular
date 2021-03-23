@@ -14,57 +14,60 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-sizes-name1" class="modal-title pull-left">ADD A NEW DIET</h4>
-        <button type="button" class="close pull-right" (click)="addDietModal.hide()" aria-label="Close">
+        <button type="button" class="close pull-right" (click)="addDietModal.hide(); resetForm();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body p-4">
-        <form class="text-center">
+        <form class="text-center" [formGroup]="dietForm">
           <div class="form-group">
-            <label for="title">
-              <h5>TITLE</h5>
+            <label for="name">
+              <h5>Name</h5>
             </label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="name" formControlName="name">
           </div>
           <div class="form-group">
-            <label for="editTitle">
+            <label for="calories">
               <h5>CALORIES</h5>
             </label>
-            <input type="text" class="form-control text-center" id="editTitle" value="">
+            <input type="number" class="form-control text-center" id="calories" formControlName="calories">
           </div>
           <div class="form-group">
             <label for="content">
               <h5>CONTENT</h5>
             </label>
-            <textarea class="form-control" id="content" rows="8"></textarea>
+            <textarea class="form-control" id="content" rows="8" formControlName="content"></textarea>
           </div>
           <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
-          <div class="form-group mb-3 row">
-            <div class="col-lg-6 mb-3 input-file">
+          <div class="form-group mb-3 row" formGroupName="img">
+            <div class="col-lg-6 mb-3">
               <label for="image">
                 <h5>SELECT IMAGE</h5>
               </label>
-              <input type="file" class="form-control-file" id="image">
+              <button class="btn secondary-btn ml-auto mr-auto d-flex"
+                onclick="document.getElementById('image').click()">Select File</button>
+              <input type="file" class="form-control-file" id="image" style="display: none"
+                (change)="selectedFile($event)">
             </div>
             <div class="col-lg-6">
               <label for="alt">
                 <h5>ALTERNATIVE TEXT</h5>
               </label>
-              <input type="text" class="form-control" id="alt">
+              <input type="text" class="form-control" id="alt" formControlName="alt">
             </div>
           </div>
-          <div *ngIf="preview">
+          <div *ngIf="existImg">
             <label class="text-center">
               <h5>IMAGE PREVIEW</h5>
             </label>
             <div class="preview ml-auto mr-auto text-center p-3 w-75">
-              <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+              <img class="rounded img-fluid align-self-center" src="{{preview}}">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer text-center d-block">
-        <button type="button" class="btn primary-btn w-50">
+        <button type="button" class="btn primary-btn w-50" (click)="submitNewDiet(); addDietModal.hide();">
           POST
         </button>
       </div>
@@ -80,8 +83,7 @@
         <div class="col-7">
           <div class="card-body">
             <h5 class="card-title">{{diet.name}}</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
+            <p class="card-text">{{diet.content.substring(0,200)}}...</p>
             <h6 style="text-transform: uppercase; font-family: 'Oswald', sans-serif;">Info:</h6>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Calories: <span>{{diet.calories}}</span></li>
@@ -92,82 +94,95 @@
         </div>
         <div class="col-5 align-self-center">
           <!--EDIT AND DELETE BUTTONS-->
-          <a type="button" class="btn btn-edit text-center" (click)="editDietModal.show()">
+          <a type="button" class="btn btn-edit text-center" (click)="editDietModal.show(); patchForm(i);">
             <i class="fa fa-pencil-square-o"></i>
           </a>
           <a type="button" class="btn btn-delete text-center" (click)="deleteDietModal.show()">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </a>
           <!--------------------------->
-          <img src="https://picsum.photos/500" class="img-fluid card-img" alt="...">
+          <img src="{{diet.img.url}}" class="img-fluid card-img" alt="...">
         </div>
       </div>
     </div>
+
     <div bsModal #editDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
       aria-labelledby="dialog-sizes-name1" id="removeSubscriptionModal_{{i}}">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT DIET</h4>
-            <button type="button" class="close pull-right" (click)="editDietModal.hide()" aria-label="Close">
+            <button type="button" class="close pull-right" (click)="editDietModal.hide(); resetForm();"
+              aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body p-4">
-            <form class="text-center">
+            <form class="text-center" [formGroup]="editDietForm">
               <div class="form-group">
-                <label for="editTitle">
+                <label for="editName">
                   <h5>TITLE</h5>
                 </label>
-                <input type="text" class="form-control text-center" id="editTitle" value="{{diet.name}}">
+                <input type="text" class="form-control text-center" id="editName" formControlName="name">
               </div>
               <div class="form-group">
-                <label for="editTitle">
+                <label for="editCalories">
                   <h5>CALORIES</h5>
                 </label>
-                <input type="text" class="form-control text-center" id="editTitle" value="{{diet.calories}}">
+                <input type="number" class="form-control text-center" id="editCalories" formControlName="calories">
               </div>
               <div class="form-group">
                 <label for="editContent">
                   <h5>CONTENT</h5>
                 </label>
-                <textarea class="form-control" id="editContent" rows="8">
-                  {{diet.content}}
+                <textarea class="form-control" id="editContent" rows="8" formControlName="content">
                 </textarea>
               </div>
               <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
-              <div class="form-group mb-3 row">
+              <div class="form-group mb-3 row" formGroupName="img">
                 <div class="col-lg-6 mb-3 input-file">
-                  <label for="editImage">
+                  <label for="url">
                     <h5>SELECT A NEW IMAGE</h5>
                   </label>
-                  <input type="file" class="form-control-file" id="editImage">
+                  <button class="btn secondary-btn ml-auto mr-auto d-flex"
+                    onclick="document.getElementById('url').click()">Select File</button>
+                  <input type="file" class="form-control-file" id="url" style="display: none"
+                    (change)="selectedFile($event)">
                 </div>
                 <div class="col-lg-6">
                   <label for="editAlt">
                     <h5>ALTERNATIVE TEXT</h5>
                   </label>
-                  <input type="text" class="form-control text-center" id="editAlt" value="{{diet.img.alt}}">
+                  <input type="text" class="form-control text-center" id="editAlt" formControlName="alt">
                 </div>
               </div>
-              <div *ngIf="preview">
+              <div *ngIf="existImg; else currentImage;">
                 <label class="text-center">
                   <h5>NEW IMAGE PREVIEW</h5>
                 </label>
                 <div class="preview ml-auto mr-auto text-center p-3 w-75">
-                  <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+                  <img class="rounded img-fluid align-self-center" src="{{preview}}">
                 </div>
               </div>
+              <ng-template #currentImage>
+                <label class="text-center">
+                  <h5>CURRENT IMAGE PREVIEW</h5>
+                </label>
+                <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                  <img class="rounded img-fluid align-self-center" src="{{currentImg}}">
+                </div>
+              </ng-template>
             </form>
           </div>
           <div class="modal-footer text-center d-block">
-            <button type="button" class="btn primary-btn w-50">
+            <button type="button" class="btn primary-btn w-50" (click)="submitEditedDiet(); editDietModal.hide();">
               SAVE CHANGES
             </button>
           </div>
         </div>
       </div>
     </div>
+
     <div bsModal #deleteDietModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
       aria-labelledby="dialog-sizes-name1">
       <div class="modal-dialog modal-sm">
@@ -180,7 +195,8 @@
           </div>
           <div class="modal-body text-center p-4">
             <p>Do you want to confirm?</p>
-            <button type="button" class="btn secondary-btn mr-1" (click)="confirm(); this.deleteDietModal.hide()">Yes,
+            <button type="button" class="btn secondary-btn mr-1"
+              (click)="confirm(diet.id, diet.img.url); this.deleteDietModal.hide()">Yes,
               delete it</button>
             <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteDietModal.hide()">No,
               thanks</button>

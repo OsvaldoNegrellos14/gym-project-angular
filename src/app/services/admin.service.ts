@@ -7,7 +7,6 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 })
 export class AdminService {
 
-  // usersCounter;
   imgRef: AngularFireStorageReference;
   uploadTask: AngularFireUploadTask;
   galleryRoute = '/images/gyms/'
@@ -22,19 +21,17 @@ export class AdminService {
 
   /*General*/
   getGyms() {
-    // let user = JSON.parse(localStorage.getItem('user'))
     return this.firebaseApi.list(`/adminGeneral/0/gyms/`).valueChanges()
-    // .subscribe((gyms:any) => {
-    //     const gym = gyms.find(gym => gym.uid == user.uid)
-    //     console.log(gym)
-    //     return gym.subscribes
-    // })
   }
 
-  uploadGymImg(img, id){
-    console.log(id);
-    this.imgRef = this.fStorage.ref(id);
+  uploadImg(img, route) {
+    this.imgRef = this.fStorage.ref(route);
     return this.uploadTask = this.imgRef.put(img);
+  }
+
+  updateImg(img, route) {
+    this.imgRef = this.fStorage.ref(route);
+    return this.imgRef.put(img);
   }
 
   /*==============*/
@@ -47,19 +44,45 @@ export class AdminService {
   //   });
   // }
 
-  // addUser(info, id) {
-  //   // const id = this.usersCounter;
-  //   this.firebaseApi.database.ref('/adminGeneral/0/gyms/0/subscribers/').child(id).set(info);
-  //   this.firebaseApi.database.ref('/users/').child(id).set(info);
-  // }
-
+  /* Users Component */
   deleteUser(id) {
     this.firebaseApi.database.ref('/adminGeneral/0/gyms/0/subscribers/').child(id).remove();
   }
+  /*===========*/
 
+  /* Gallery Component */
   addToGallery(img, id) {
-    this.firebaseApi.database.ref('/adminGeneral/0/gyms/+/galery').child(id).set(img);
+    this.firebaseApi.database.ref('/adminGeneral/0/gyms/0/gallery').child(id).set(img);
   }
+  /*===========*/
+
+  /* Routines Component */
+  setRoutine(routine, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/routines').child(id).set(routine);
+  }
+  /*=================*/
+
+  /* Diets Component */
+  setDiet(diet, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/diets').child(id).set(diet);
+  }
+  /*===============*/
+
+  /* News Component */
+  setNews(news, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/news').child(id).set(news);
+  }
+  /*==============*/
+
+  /* Drop Data */
+  dropData(route) {
+    this.firebaseApi.database.ref(route).remove();
+  }
+
+  dropImg(id) {
+    this.fStorage.storage.refFromURL(id).delete();
+  }
+  /*==========*/
 
 
 }
