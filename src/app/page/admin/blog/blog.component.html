@@ -27,6 +27,12 @@
             <input type="text" class="form-control" id="title">
           </div>
           <div class="form-group">
+            <label for="title">
+              <h5>DATE</h5>
+            </label>
+            <input type="text" class="form-control" id="title">
+          </div>
+          <div class="form-group">
             <label for="content">
               <h5>CONTENT</h5>
             </label>
@@ -68,7 +74,7 @@
 
 <!--BLOG CARDS-->
 <div class="row">
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-bottom: 15px;">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin: 10px 10px;" *ngFor="let new of news; index as i">
     <div class="card" style="width: 16rem;">
 
       <!--EDIT AND DELETE BUTTONS-->
@@ -79,19 +85,83 @@
         <i class="fa fa-trash" aria-hidden="true"></i>
       </a>
       <!-------------------------->
-      
-      <img src="https://picsum.photos/200" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">NEWS TITLE</h5>
+
+      <img src="{{new.img.url}}" class="card-img-top" alt="...">
+      <div class="card-body" style="height: 400px; overflow: scroll;">
+        <h5 class="card-title">{{new.title}}</h5>
         <h6 style="text-transform: uppercase;">Content:</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
+        <p class="card-text">{{new.content}}</p>
         <button type="button" class="btn primary-btn ml-auto w-75 d-block text-center">VIEW</button>
       </div>
       <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">{{new.date}}</small>
       </div>
     </div>
+    <div bsModal #editBlogModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-sizes-name1" class="modal-title pull-left">EDIT NEWS</h4>
+          <button type="button" class="close pull-right" (click)="editBlogModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p-4">
+          <form class="text-center">
+            <div class="form-group">
+              <label for="editTitle">
+                <h5>TITLE</h5>
+              </label>
+              <input type="text" class="form-control text-center" id="editTitle" value="{{new.title}}">
+            </div>
+            <div class="form-group">
+              <label for="editTitle">
+                <h5>DATE</h5>
+              </label>
+              <input type="text" class="form-control text-center" id="editTitle" value="{{new.date}}">
+            </div>
+            <div class="form-group">
+              <label for="editContent">
+                <h5>CONTENT</h5>
+              </label>
+              <textarea class="form-control" id="editContent" rows="8">
+                {{new.content}}
+              </textarea>
+            </div>
+            <h5 class="upload pb-3">UPLOAD AN IMAGE</h5>
+            <div class="form-group mb-3 row">
+              <div class="col-lg-6 mb-3 input-file">
+                <label for="editImage">
+                  <h5>SELECT A NEW IMAGE</h5>
+                </label>
+                <input type="file" class="form-control-file" id="editImage">
+              </div>
+              <div class="col-lg-6">
+                <label for="editAlt">
+                  <h5>ALTERNATIVE TEXT</h5>
+                </label>
+                <input type="text" class="form-control text-center" id="editAlt" value="{{new.img.alt}}">
+              </div>
+            </div>
+            <div *ngIf="preview">
+              <label class="text-center">
+                <h5>NEW IMAGE PREVIEW</h5>
+              </label>
+              <div class="preview ml-auto mr-auto text-center p-3 w-75">
+                <img class="rounded img-fluid align-self-center" src="https://picsum.photos/300">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer text-center d-block">
+          <button type="button" class="btn primary-btn w-50">
+            SAVE CHANGES
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!--EDIT MODAL-->
@@ -172,42 +242,6 @@
           <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteBlogModal.hide()">No,
             thanks</button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-    <div class="card" style="width: 16rem;">
-      <img src="https://picsum.photos/200" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Titulo de la publicacion</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Ver más</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-    <div class="card" style="width: 16rem;">
-      <img src="https://picsum.photos/200" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Titulo de la publicacion</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Ver más</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-    <div class="card" style="width: 16rem;">
-      <img src="https://picsum.photos/200" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Titulo de la publicacion</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Ver más</a>
       </div>
     </div>
   </div>
