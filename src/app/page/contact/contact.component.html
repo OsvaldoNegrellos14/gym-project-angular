@@ -13,15 +13,15 @@
             <div class="col-lg-4">
                 <div class="contact-info">
                     <i class="ti-location-pin"></i>
-                    <p>Iris Watson. 10, P.O. Box 283 Newyork</p>
+                    <p>{{data.address}}</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="contact-info">
                     <i class="ti-email"></i>
                     <ul>
-                        <li><span>Phone:</span> 12-456-791</li>
-                        <li><span>Mail:</span> colorlib@gmail.com</li>
+                        <li><span>Phone:</span> {{data.phone}}</li>
+                        <li><span>Mail:</span> {{data.email}}</li>
                     </ul>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="contact-info">
                     <i class="ti-timer"></i>
                     <ul>
-                        <li><span>Week Days:</span> 10:00 – 22:00</li>
+                        <li><span>Week Days:</span> {{data.schedule}}</li>
                         <li><span>Sunday:</span> Close</li>
                     </ul>
                 </div>

@@ -35,5 +35,37 @@ export class PublicService {
   getDiets() {
     return this.firebaseApi.list('/adminGeneral/0/gyms/0/diets').valueChanges();
   }
+
+  getDataGym() {
+    return this.firebaseApi.object(`/adminGeneral/0/gyms/0`).valueChanges();
+  }
+
+  getDataNews() {
+    return this.firebaseApi.list('/adminGeneral/0/gyms/0/news').valueChanges();
+  }
+
+  getDaysGym() {
+    return this.firebaseApi.list('/adminGeneral/0/gyms/0/week').valueChanges();
+  }
+
+  getnewDetails(id:any) {
+    return this.firebaseApi.object(`/adminGeneral/0/gyms/0/news/${id}`).valueChanges();
+  }
   
+  postToRoutines(routine:any, id) {
+    this.firebaseApi.database.ref(`/users/${id}/routines`).child(routine.id).set(routine);
+  }
+
+  postToDiets(diet:any, id) {
+    this.firebaseApi.database.ref(`/users/${id}/diets`).child(diet.id).set(diet);
+  }
+
+  deleteToRoutines(rotuine:any, id) {
+    this.firebaseApi.database.ref(`/users/${id}/routines/${rotuine.id}`).remove();
+  }
+
+  deleteToDiet(diet:any, id) {
+    this.firebaseApi.database.ref(`/users/${id}/diets/${diet.id}`).remove();
+  }
+
 }

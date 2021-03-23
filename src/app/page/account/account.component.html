@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <form style="width: 50%; margin-left: auto; margin-right: auto">
+  <form style="width: 50%; margin-left: auto; margin-right: auto" (ngSubmit)="updateInfoUser()" [formGroup]="dataUser">
     <div style="text-align: center">
       <img
         src="/assets/img/trainer/trainer-3.jpg"
@@ -18,6 +18,7 @@
           id="inputName"
           placeholder="Nombre del gym"
           value="{{ user.name }}"
+          formControlName="name"
         />
       </div>
     </div>
@@ -31,6 +32,7 @@
           placeholder="Email"
           disabled
           value="{{ user.email }}"
+          formControlName="email"
         />
       </div>
     </div>
@@ -45,6 +47,7 @@
           id="inputUserHeight"
           placeholder="centimeters"
           value="{{ user.height }}"
+          formControlName="height"
         />
       </div>
     </div>
@@ -59,6 +62,7 @@
           id="inputUserHeight"
           placeholder="centimeters"
           value="{{ user.weight }}"
+          formControlName="weight"
         />
       </div>
     </div>
@@ -75,16 +79,172 @@
   <hr />
 
   <div *ngIf="user.routines != null; else elseBlock">
-      si hay rutinas
-    </div>
-  <ng-template #elseBlock>
-      <div style="text-align: center;">
-        <b style="font-size: 20px;">
-            You don't have registered routines
-        </b>
-        <br>
-        <a class="btn primary-btn" [routerLink]="['/diets']">register now</a>
+    <div class="row">
+      <div
+        class="col-xl-3 col-sm-6 col-12"
+        *ngFor="let routine of user.routines"
+        style="padding-top: 15px; padding-bottom: 15px"
+      >
+        <div
+          class="card"
+          style="
+              background-image: url('{{ routine.img.url }}');
+              border: 1px solid #ccc;
+              background-size: cover;
+            "
+        >
+          <!--EDIT AND DELETE BUTTONS-->
+          <a
+            type="button"
+            class="btn btn-edit text-center"
+            (click)="showRoutineModal.show()"
+          >
+            <i class="fa fa-eye"></i>
+          </a>
+          <a
+            type="button"
+            class="btn btn-delete text-center"
+            (click)="deleteRoutineModal.show()"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </a>
+          <!--------------------------->
+          <div
+            class="background"
+            style="background: rgba(0, 0, 0, 0.5); color: white !important"
+          >
+            <div class="card-content">
+              <div class="card-body pb-5">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-pencil primary font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-left">
+                    <h3 class="text-white">{{ routine.name }}</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" style="border-top: 1px solid #ccc">
+                <div class="media d-flex">
+                  <div class="media-body text-right">
+                    <h3 class="text-white">{{ routine.category }}</h3>
+                    <span>Category</span>
+                  </div>
+                  <div class="align-self-center">
+                    <i class="icon-rocket danger font-large-2 float-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--EDIT ROUTINE MODAL-->
+        <div
+          bsModal
+          #showRoutineModal="bs-modal"
+          class="modal fade"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="dialog-sizes-name1"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+                  {{ routine.name }}
+                </h4>
+                <button
+                  type="button"
+                  class="close pull-right"
+                  (click)="showRoutineModal.hide()"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body p-4">
+                <form class="text-center">
+                  <div class="form-group">
+                    <label for="editTitle">
+                      <h5>CATEGORY</h5>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control text-center"
+                      id="editTitle"
+                      value="{{ routine.category }}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="editContent">
+                      <h5>DESCRIPTION</h5>
+                    </label>
+                    <textarea class="form-control" id="editContent" rows="10">{{
+                      routine.content
+                    }}</textarea>
+                  </div>
+                  <div class="modal-footer text-center d-block"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          bsModal
+          #deleteRoutineModal="bs-modal"
+          class="modal fade"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="dialog-sizes-name1"
+        >
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+                  DELETE ROUTINE
+                </h4>
+                <button
+                  type="button"
+                  class="close pull-right"
+                  (click)="deleteRoutineModal.hide()"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body text-center p-4">
+                <p>Do you want to confirm?</p>
+                <button
+                  type="button"
+                  class="btn secondary-btn mr-1"
+                  (click)="
+                    confirmDeleteRoutine(routine.id, routine);
+                    this.deleteRoutineModal.hide()
+                  "
+                >
+                  Yes, delete it
+                </button>
+                <button
+                  type="button"
+                  class="btn primary-btn ml-1"
+                  (click)="this.deleteRoutineModal.hide()"
+                >
+                  No, thanks
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div style="text-align: center">
+      <b style="font-size: 20px"> You don't have registered routines </b>
+      <br />
+      <a class="btn primary-btn" [routerLink]="['/schedule']">register now</a>
+    </div>
   </ng-template>
 
   <br />
@@ -93,16 +253,176 @@
   <hr />
 
   <div *ngIf="user.diets != null; else elseBlock2">
-      si hay rutinas
+    <div class="row">
+      <div
+        class="col-xl-3 col-sm-6 col-12"
+        *ngFor="let diet of user.diets"
+        style="padding-top: 15px; padding-bottom: 15px"
+      >
+        <div
+          class="card"
+          style="
+              background-image: url('{{ diet.img.url }}');
+              border: 1px solid #ccc;
+              background-size: cover;
+            "
+        >
+          <!--EDIT AND DELETE BUTTONS-->
+          <a
+            type="button"
+            class="btn btn-edit text-center"
+            (click)="showRoutineModal.show()"
+          >
+            <i class="fa fa-eye"></i>
+          </a>
+          <a
+            type="button"
+            class="btn btn-delete text-center"
+            (click)="deleteDietModal.show()"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </a>
+          <!--------------------------->
+          <div
+            class="background"
+            style="background: rgba(0, 0, 0, 0.5); color: white !important"
+          >
+            <div class="card-content">
+              <div class="card-body pb-5">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-pencil primary font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-left">
+                    <h3 class="text-white">{{ diet.name }}</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" style="border-top: 1px solid #ccc">
+                <div class="media d-flex">
+                  <div class="media-body text-right">
+                    <h3 class="text-white">{{ diet.calories }}</h3>
+                    <span>Calories</span>
+                  </div>
+                  <div class="align-self-center">
+                    <i class="icon-rocket danger font-large-2 float-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--EDIT ROUTINE MODAL-->
+        <div
+          bsModal
+          #showRoutineModal="bs-modal"
+          class="modal fade"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="dialog-sizes-name1"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+                  {{ diet.name }}
+                </h4>
+                <button
+                  type="button"
+                  class="close pull-right"
+                  (click)="showRoutineModal.hide()"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body p-4">
+                <form class="text-center">
+                  <div class="form-group">
+                    <label for="editTitle">
+                      <h5>CALORIES</h5>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control text-center"
+                      id="editTitle"
+                      value="{{ diet.calories }}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="editContent">
+                      <h5>DESCRIPTION</h5>
+                    </label>
+                    <textarea class="form-control" id="editContent" rows="10">{{
+                      diet.content
+                    }}</textarea>
+                  </div>
+                  <div class="modal-footer text-center d-block">
+                    <!-- <button type="button" class="btn primary-btn w-50" (click)="addToRoutines(routine); showRoutineModal.hide()">
+                        Assign routine
+                      </button> -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          bsModal
+          #deleteDietModal="bs-modal"
+          class="modal fade"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="dialog-sizes-name1"
+        >
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+                  DELETE DIET
+                </h4>
+                <button
+                  type="button"
+                  class="close pull-right"
+                  (click)="deleteDietModal.hide()"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body text-center p-4">
+                <p>Do you want to confirm?</p>
+                <button
+                  type="button"
+                  class="btn secondary-btn mr-1"
+                  (click)="
+                    confirmDeleteDiet(diet); this.deleteDietModal.hide()
+                  "
+                >
+                  Yes, delete it
+                </button>
+                <button
+                  type="button"
+                  class="btn primary-btn ml-1"
+                  (click)="this.deleteDietModal.hide()"
+                >
+                  No, thanks
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <ng-template #elseBlock2>
-    <div style="text-align: center;">
-        <b style="font-size: 20px;">
-            You don't have registered diets
-        </b>
-        <br>
-        <a class="btn primary-btn" [routerLink]="['/schedule']">register now</a>
-      </div>
+    <div style="text-align: center">
+      <b style="font-size: 20px"> You don't have registered diets </b>
+      <br />
+      <a class="btn primary-btn" [routerLink]="['/diets']">register now</a>
+    </div>
   </ng-template>
   <br />
   <br />

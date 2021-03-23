@@ -94,7 +94,7 @@
                   <textarea class="form-control" id="editContent" rows="10">{{routine.content}}</textarea>
                 </div>
                 <div class="modal-footer text-center d-block">
-                  <button type="button" class="btn primary-btn w-50">
+                  <button type="button" class="btn primary-btn w-50" (click)="addToRoutines(routine); showRoutineModal.hide()">
                     Assign routine
                   </button>
                 </div>

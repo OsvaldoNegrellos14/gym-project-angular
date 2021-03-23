@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'portfolio', component: GalleryComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'blog-details', component: BlogDetailsComponent },
+  { path: 'blog-details/:id', component: BlogDetailsComponent },
   { path: 'account', component: AccountComponent },
   { path: '', loadChildren: () => import('./page/admin/admin.module').then( m => m.AdminModule ) }
 ];

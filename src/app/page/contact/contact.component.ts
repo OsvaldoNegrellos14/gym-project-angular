@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  data:any = {
+    'address': '',
+    'phone': '',
+    'mail': '',
+    'schedule': ''
+  };
+
+  constructor(
+    private publicService: PublicService
+  ) { }
 
   ngOnInit() {
+    this.publicService.getDataGym()
+    .subscribe((datas:any) => {
+      this.data = datas.info
+      console.log(this.data)
+    })
   }
 
 }
