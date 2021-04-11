@@ -1,7 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { PublicService } from "../../services/public.service";
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  FormGroupName,
+} from "@angular/forms";
 
 @Component({
   selector: "app-account",
@@ -18,64 +23,101 @@ export class AccountComponent implements OnInit {
     routines: [],
     diets: [],
   };
-  dataUser = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    height: new FormControl(''),
-    weight: new FormControl('')
-  })
-  
+  dataUserGym = this.form.group({
+    uid: '',
+    email: "",
+    info: new FormGroup({
+      height: new FormControl(""),
+      weight: new FormControl(""),
+      name: new FormControl(""),
+      age: new FormControl("")
+    }),
+  });
 
-  constructor(private publicService: PublicService) {}
+  dataUser= this.form.group({
+    age: '',
+    height: "",
+    name: "",
+    weight: ""
+  });
+
+  constructor(
+    private publicService: PublicService,
+    private form: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.clientesSubscription = this.publicService.getUsers().subscribe((users: any) => {
-      const user = users.find(user => user.uid == JSON.parse(localStorage.getItem("user")).uid);
-      this.user = user;
-      user['routines'] != null ? this.user["routines"] = Object.values(user["routines"]): console.log('no hay datos')
-      user['diets'] != null ? this.user["diets"] = Object.values(user["diets"]) : console.log('no hay datos')
-      // this.user["routines"] = Object.values(user["routines"])
-      // this.user["diets"] = Object.values(user["diets"])
-      console.log(this.user);
-    });
+    this.clientesSubscription = this.publicService
+      .getUsers()
+      .subscribe((users: any) => {
+        const user = users.find(
+          (user) => user.uid == JSON.parse(localStorage.getItem("user")).uid
+        );
+        this.user = user;
+        user["routines"] != null
+          ? (this.user["routines"] = Object.values(user["routines"]))
+          : console.log("no hay datos");
+        user["diets"] != null
+          ? (this.user["diets"] = Object.values(user["diets"]))
+          : console.log("no hay datos");
+        this.dataUserGym.patchValue({
+          uid: this.user.uid,
+          email: this.user.email,
+          info: {
+            height: this.user.info.height,
+            weight: this.user.info.weight,
+            name: this.user.info.name,
+            age: this.user.info.age
+          }
+        });
+        
+        console.log(this.user);
+      });
   }
 
   confirmDeleteRoutine(id, routine) {
-    let deleteSubscription = this.publicService.getUsers().subscribe((users: any) => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      for (let index = 0; index < users.length; index++) {
-        if (users[index].uid == user.uid) {
-          this.publicService.deleteToRoutines(routine, index);
-          deleteSubscription.unsubscribe()
+    let deleteSubscription = this.publicService
+      .getUsers()
+      .subscribe((users: any) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        for (let index = 0; index < users.length; index++) {
+          if (users[index].uid == user.uid) {
+            this.publicService.deleteToRoutines(routine, index);
+            deleteSubscription.unsubscribe();
+          }
         }
-      }
-    });
-    
+      });
   }
 
   confirmDeleteDiet(diet) {
-    let delete1Subscription = this.publicService.getUsers().subscribe((users: any) => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      for (let index = 0; index < users.length; index++) {
-        if (users[index].uid == user.uid) {
-          this.publicService.deleteToDiet(diet, index);
-          delete1Subscription.unsubscribe()
+    let delete1Subscription = this.publicService
+      .getUsers()
+      .subscribe((users: any) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        for (let index = 0; index < users.length; index++) {
+          if (users[index].uid == user.uid) {
+            this.publicService.deleteToDiet(diet, index);
+            delete1Subscription.unsubscribe();
+          }
         }
-      }
-    });
-    
+      });
   }
 
   updateInfoUser() {
-    // this.dataUser.value.name = this.user.name;
-    // this.dataUser.value.email = this.user.email;
-    // this.user.height != null ? this.dataUser.value.height = this.user.height : console.log('listo')
-    // this.user.weight != null ? this.dataUser.value.weight = this.user.weight : console.log('listo')
-    // console.log(this.dataUser.value)
+    this.dataUser.patchValue({
+      age: this.dataUserGym.value.info.age,
+      height: this.dataUserGym.value.info.height,
+      name: this.dataUserGym.value.info.name,
+      weight: this.dataUserGym.value.info.weight
+    })
+    this.dataUserGym.value.email = this.user.email
+    this.publicService.updateInfoUser(this.dataUserGym.value, this.dataUser.value)
+    // console.log(this.dataUserGym.value);
+    // console.log(this.dataUser.value);
   }
 
   ngOnDestroy(): void {
-    this.clientesSubscription.unsubscribe()
+    this.clientesSubscription.unsubscribe();
     // this.user = {
     //   name: "",
     //   email: "",
@@ -85,5 +127,4 @@ export class AccountComponent implements OnInit {
     //   diets: [],
     // }
   }
-
 }

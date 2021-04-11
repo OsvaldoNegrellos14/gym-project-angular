@@ -10,9 +10,15 @@ import { PublicService } from '../../services/public.service';
 export class IndexComponent implements OnInit {
 
   user = this.form.group({
-    name: '',
+    info: {
+      name: '',
+      height: '',
+      weight: '',
+      age: ''
+    },
     email: '',
-    uid: ''
+    uid: '',
+    img: ''
   });
   data:any;
 
@@ -31,15 +37,18 @@ export class IndexComponent implements OnInit {
       this.publicService.getUsers().subscribe((response:any) => {
         const userLocal = JSON.parse(this.data);
         const user = response.find(user => user.uid == userLocal.uid)
-        this.user.value.name = user.name;
+        this.user.value.info = user.info;
+        this.user.value.img = user.img;
         this.user.value.email = user.email;
         this.user.value.uid = user.uid;
-        console.log(response)
+        console.log(this.user.value)
+        console.log(user)
       })
     }
   }
   
   async register() {
+    console.log(this.user.value)
     await this.publicService.addUser(this.user.value, this.user.value.uid);
   }
 

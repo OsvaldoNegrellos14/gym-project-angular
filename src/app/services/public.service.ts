@@ -68,4 +68,9 @@ export class PublicService {
     this.firebaseApi.database.ref(`/users/${id}/diets/${diet.id}`).remove();
   }
 
+  updateInfoUser(infoUserGym:any, infoUserPrimary:any) {
+    this.firebaseApi.database.ref('/adminGeneral/0/gyms/0/subscribers/').child(infoUserGym.uid).set(infoUserGym);
+    this.firebaseApi.database.ref(`/users/0/info`).set(infoUserPrimary);
+  }
+
 }
