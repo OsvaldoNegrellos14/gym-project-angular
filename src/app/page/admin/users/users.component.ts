@@ -25,10 +25,10 @@ export class UsersComponent implements OnInit {
     await this.adminService.getGyms()
       .subscribe((gyms: any) => {
         const user = JSON.parse(localStorage.getItem('user'));
-        const gym = gyms.find(gym => gym.uid == user.uid)
+        const gym = gyms.find(gym => gym.uid == user.uid);
         // this.users = gym.subscribers;
-        this.users = Object.values(gym.subscribers);
-        this.countUsers = gym.subscribers.length;
+        gym['subscribers'] != null ? this.users = Object.values(gym.subscribers): console.log('no hay datos');
+        // this.countUsers = gym.subscribers.length;
       });
     // this.adminService.getCountSubscribers();
   }
@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit {
 
   async confirm(id) {
     await this.adminService.deleteUser(id);
+    this.users = null;
     console.log("Subscription removed! User:", id);
   }
 

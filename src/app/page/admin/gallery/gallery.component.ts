@@ -34,8 +34,8 @@ export class GalleryComponent implements OnInit {
     this.adminService.getGyms()
       .subscribe((gyms: any) => {
         const gym = gyms.find(gym => gym.uid == this.user.uid)
-        this.gallery = Object.values(gym.gallery);
-        this.imgCounter = gym.gallery.length;
+        gym['gallery'] != null ? this.gallery = Object.values(gym.gallery): console.log('no hay datos');
+        // this.imgCounter = gym.gallery.length;
         // console.log(this.gallery)
         this.spinner.hide();
       })
@@ -87,11 +87,12 @@ export class GalleryComponent implements OnInit {
     this.imgForm.reset();
   }
 
-  async confirm(img, id: any) {
+  async confirm(img, id: any, index) {
     this.spinner.show();
     this.adminService.dropData('/adminGeneral/0/gyms/0/gallery/' + id);
     await this.adminService.dropImg(img);
     // console.log("Image deleted", id);
+    // console.log(this.gallery);
     this.spinner.hide();
   }
 

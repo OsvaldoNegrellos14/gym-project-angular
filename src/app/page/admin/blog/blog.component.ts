@@ -56,7 +56,7 @@ export class BlogComponent implements OnInit {
         this.news = Object.values(gym.news);
         // console.log(this.news)
         this.spinner.hide();
-      })
+      });
   }
 
   async submitNews() {
@@ -92,12 +92,12 @@ export class BlogComponent implements OnInit {
         this.editNewsForm.value.id = this.currentId;
         this.editNewsForm.value.img.id = this.currentId;
         this.editNewsForm.value.img.url = fileUrl;
-        this.adminService.setNews(this.editNewsForm.value, this.currentId);
+        this.adminService.updateNews(this.editNewsForm.value, this.currentId);
       })
     } else {
       this.editNewsForm.value.img.url = this.currentImg;
       this.editNewsForm.value.id = this.currentId;
-      await this.adminService.setNews(this.editNewsForm.value, this.currentId);
+      await this.adminService.updateNews(this.editNewsForm.value, this.currentId);
       // console.log(this.editNewsForm.value.id);
     }
     this.existImg = false;

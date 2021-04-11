@@ -51,14 +51,14 @@
         style="top: .5rem !important;">
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
-      <img src="https://picsum.photos/200" class="card-img-top" alt="..." />
+      <!-- <img src="{{user.info.img}}" class="card-img-top" alt="..." /> -->
       <div class="card-body">
-        <h5 class="card-title">{{user.name}}</h5>
+        <h5 class="card-title">{{user.info.name}}</h5>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>Weight:</b> {{user.weight}}.</li>
-        <li class="list-group-item"><b>Height:</b> {{user.height}}.</li>
-        <li class="list-group-item"><b>Age:</b> {{user.age}}</li>
+        <li class="list-group-item"><b>Weight:</b> {{user.info.weight}}.</li>
+        <li class="list-group-item"><b>Height:</b> {{user.info.height}}.</li>
+        <li class="list-group-item"><b>Age:</b> {{user.info.age}}</li>
       </ul>
     </div>
     <!--REMOVE SUBSCRIPTION MODAL-->
@@ -78,7 +78,7 @@
               (click)="confirm(user.uid); this.removeSubscriptionModal.hide()">Yes,
               remove it</button> -->
               <button type="button" class="btn secondary-btn ml-auto mr-auto d-block mb-3"
-              (click)="confirm(i); this.removeSubscriptionModal.hide()">Yes,
+              (click)="confirm(user.uid); this.removeSubscriptionModal.hide()">Yes,
               remove it</button>
             <button type="button" class="btn primary-btn ml-auto mr-auto d-block"
               (click)="decline(); this.removeSubscriptionModal.hide()">No,

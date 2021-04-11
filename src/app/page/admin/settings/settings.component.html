@@ -9,39 +9,62 @@
 <form style="width: 50%; margin-left: auto; margin-right: auto;" [formGroup]="gymForm">
   <div class="form-group row">
     <label for="inputNameGym" class="col-sm-4 col-form-label">Nombre del gimnasio</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputNameGym" placeholder="Nombre del gym" formControlName="name">
+    <div class="col-8 input-group">
+      <input type="text" class="form-control" id="inputNameGym" placeholder="Nombre del gym"
+        formControlName="name">
+      <div class="input-group-append border-left-0">
+        <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.name !== ''"
+          (click)="gymForm.patchValue({name: ''});"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputAdminName" class="col-sm-4 col-form-label">Administrador</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8 input-group">
       <input type="text" class="form-control" id="inputAdminName" placeholder="Nombre del administrador"
         formControlName="admin">
+      <div class="input-group-append border-left-0">
+        <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.admin !== ''"
+          (click)="gymForm.patchValue({admin:''});"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail" class="col-sm-4 col-form-label">Email</label>
-    <div class="col-sm-8">
-      <input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email">
+    <div class="col-sm-8 input-group">
+      <input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email" disabled>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPhone" class="col-sm-4 col-form-label">Phone</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8 input-group">
       <input type="tel" class="form-control" id="inputPhone" placeholder="Phone" formControlName="phone">
+      <div class="input-group-append border-left-0">
+        <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.phone !== ''"
+          (click)="gymForm.patchValue({phone:''});"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputAddress" class="col-sm-4 col-form-label">Address</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputAddress" placeholder="Address" formControlName="address">
+    <div class="col-sm-8 input-group">
+      <input type="text" class="form-control" id="inputAddress" placeholder="Address"
+        formControlName="address">
+      <div class="input-group-append border-left-0">
+        <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.address !== ''"
+          (click)="gymForm.patchValue({address:''});"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputSchedule" class="col-sm-4 col-form-label">Horario</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputSchedule" placeholder="9:00 - 22:00" formControlName="schedule">
+    <div class="col-sm-8 input-group">
+      <input type="text" class="form-control" id="inputSchedule" placeholder="Schedule"
+        formControlName="schedule">
+      <div class="input-group-append border-left-0">
+        <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.schedule !== ''"
+          (click)="gymForm.patchValue({schedule:''});"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
 
@@ -51,38 +74,56 @@
     <div class="form-group row">
       <div class="col-sm-2"><i class="fa fa-facebook-square" aria-hidden="true"
           style="font-size: 30px; color: #3b5998;"></i></div>
-      <div class="col-sm-10">
+      <div class="col-sm-10 input-group">
         <input type="text" class="form-control" id="inputFacebook" placeholder="URL de sitio"
           formControlName="facebook">
+        <div class="input-group-append border-left-0">
+          <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.social.facebook !== ''"
+          (click)="gymForm.patchValue({social:{facebook:''}});"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-2"><i class="fa fa-instagram" aria-hidden="true" style="font-size: 30px; color: #3f729b;"></i>
       </div>
-      <div class="col-sm-10">
+      <div class="col-sm-10 input-group">
         <input type="text" class="form-control" id="inputInstagram" placeholder="URL de sitio"
           formControlName="instagram">
+        <div class="input-group-append border-left-0">
+          <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.social.instagram !== ''"
+          (click)="gymForm.patchValue({social:{instagram:''}});"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-2"><i class="fa fa-twitter-square" aria-hidden="true"
           style="font-size: 30px; color: #00acee;"></i></div>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputTwitter" placeholder="URL de sitio" formControlName="twitter">
+      <div class="col-sm-10 input-group">
+        <input type="text" class="form-control" id="inputTwitter" placeholder="URL de sitio"
+          formControlName="twitter">
+        <div class="input-group-append border-left-0">
+          <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.social.twitter !== ''"
+          (click)="gymForm.patchValue({social:{twitter:''}});"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-2"><i class="fa fa-youtube-square" aria-hidden="true"
           style="font-size: 30px; color: #c4302b;"></i></div>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputYoutube" placeholder="URL de sitio" formControlName="youtube">
+      <div class="col-sm-10 input-group">
+        <input type="text" class="form-control" id="inputYoutube" placeholder="URL de sitio"
+          formControlName="youtube">
+        <div class="input-group-append border-left-0">
+          <button class="btn border-left-0" style="border-color: #ccc;" type="button" *ngIf="gymForm.value.social.youtube !== ''"
+          (click)="gymForm.patchValue({social:{youtube:''}});"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="form-group row">
     <div class="col-sm-10">
-      <!-- <button type="submit" class="btn primary-btn ml-auto mr-auto d-block" (click)="submitGymInfo();">Save</button> -->
+      <button type="submit" class="btn primary-btn ml-auto mr-auto d-block" (click)="submitGymInfo();">Save</button>
     </div>
   </div>
 </form>
@@ -327,7 +368,8 @@
               </form>
             </div>
             <div class="modal-footer text-center d-block">
-              <button type="button" class="btn primary-btn w-50" (click)="submitEditedCoaches(); editCoachModal.hide();">
+              <button type="button" class="btn primary-btn w-50"
+                (click)="submitEditedCoaches(); editCoachModal.hide();">
                 Save Changes
               </button>
             </div>

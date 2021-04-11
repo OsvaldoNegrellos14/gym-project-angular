@@ -127,7 +127,7 @@
           </div>
           <div class="modal-body text-center p-4">
             <p>Do you want to confirm?</p>
-            <button type="button" class="btn secondary-btn mr-1" (click)="confirm(gallerys.img, gallerys.id); this.deleteImageModal.hide()">Yes,
+            <button type="button" class="btn secondary-btn mr-1" (click)="confirm(gallerys.img, gallerys.id, i); this.deleteImageModal.hide()">Yes,
               delete it</button>
             <button type="button" class="btn primary-btn ml-1" (click)="decline(); this.deleteImageModal.hide()">No,
               thanks</button>

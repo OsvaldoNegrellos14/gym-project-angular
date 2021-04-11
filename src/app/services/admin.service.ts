@@ -60,11 +60,17 @@ export class AdminService {
   setRoutine(routine, id) {
     this.firebaseApi.database.ref('adminGeneral/0/gyms/0/routines').child(id).set(routine);
   }
+  updateRoutine(routine, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/routines').child(id).update(routine);
+  }
   /*=================*/
 
   /* Diets Component */
   setDiet(diet, id) {
     this.firebaseApi.database.ref('adminGeneral/0/gyms/0/diets').child(id).set(diet);
+  }
+  updateDiet(diet, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/diets').child(id).update(diet);
   }
   /*===============*/
 
@@ -72,14 +78,20 @@ export class AdminService {
   setNews(news, id) {
     this.firebaseApi.database.ref('adminGeneral/0/gyms/0/news').child(id).set(news);
   }
+  updateNews(news, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/news').child(id).update(news);
+  }
   /*==============*/
 
   /* Settings Component */
-  setAdminData(info, id) {
-    this.firebaseApi.database.ref('adminGeneral/0/gyms/').child(id).set(info);
+  setAdminData(info) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/info').update(info);
   }
   setCoach(coach, id) {
     this.firebaseApi.database.ref('adminGeneral/0/gyms/0/coaches').child(id).set(coach)
+  }
+  updateCoach(coach, id) {
+    this.firebaseApi.database.ref('adminGeneral/0/gyms/0/coaches').child(id).update(coach)
   }
   /*===================*/
 

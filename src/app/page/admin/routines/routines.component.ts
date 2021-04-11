@@ -93,12 +93,12 @@ export class RoutinesComponent implements OnInit {
         this.editRoutineForm.value.id = this.currentId;
         this.editRoutineForm.value.img.id = this.currentId;
         this.editRoutineForm.value.img.url = fileUrl;
-        this.adminService.setRoutine(this.editRoutineForm.value, this.currentId);
+        this.adminService.updateRoutine(this.editRoutineForm.value, this.currentId);
       })
     } else {
       this.editRoutineForm.value.img.url = this.currentImg;
       this.editRoutineForm.value.id = this.currentId;
-      await this.adminService.setRoutine(this.editRoutineForm.value, this.currentId);
+      await this.adminService.updateRoutine(this.editRoutineForm.value, this.currentId);
       // console.log(this.editRoutineForm.value.id);
     }
     this.existImg = false;

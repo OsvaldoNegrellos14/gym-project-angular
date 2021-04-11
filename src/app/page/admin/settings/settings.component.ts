@@ -92,10 +92,10 @@ export class SettingsComponent implements OnInit {
     this.adminService.getGyms()
       .subscribe((gyms: any) => {
         this.coaches = Object.values(gyms.find(gym => gym.uid == this.user.uid).coaches);
-        const gymData = gyms.find(gym => gym.uid == this.user.uid);
+        const gymData = gyms.find(gym => gym.uid == this.user.uid).info;
         this.gymForm.patchValue({
           address: gymData.address,
-          admin: gymData.name,
+          admin: gymData.admin,
           email: gymData.email,
           name: gymData.name,
           phone: gymData.phone,
@@ -115,9 +115,9 @@ export class SettingsComponent implements OnInit {
 
   }
 
-  // async submitGymInfo() {
-  //   await this.adminService.setAdminData(this.gymForm.value, '0');
-  // }
+  async submitGymInfo() {
+    await this.adminService.setAdminData(this.gymForm.value);
+  }
 
   async submitCoach() {
     this.spinner.show();
@@ -221,6 +221,11 @@ export class SettingsComponent implements OnInit {
     this.existImg = false;
     this.preview = this.currentImg;
     this.file = null;
+  }
+
+  resetInput(input) {
+    this.coachForm.reset({
+    })
   }
 
   async getImgUrl(fileId: any) {

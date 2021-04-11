@@ -91,12 +91,12 @@ export class DietsComponent implements OnInit {
         this.editDietForm.value.id = this.currentId;
         this.editDietForm.value.img.id = this.currentId;
         this.editDietForm.value.img.url = fileUrl;
-        this.adminService.setDiet(this.editDietForm.value, this.currentId);
+        this.adminService.updateDiet(this.editDietForm.value, this.currentId);
       })
     } else {
       this.editDietForm.value.img.url = this.currentImg;
       this.editDietForm.value.id = this.currentId;
-      await this.adminService.setDiet(this.editDietForm.value, this.currentId);
+      await this.adminService.updateDiet(this.editDietForm.value, this.currentId);
       // console.log(this.editDietForm.value.id);
     }
     this.existImg = false;
